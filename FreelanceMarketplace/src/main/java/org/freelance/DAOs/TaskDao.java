@@ -1,4 +1,7 @@
 package org.freelance.DAOs;
 
-public class TaskDao {
+import org.freelance.models.Task;
+
+public class TaskDao extends AbstractHibernateDao<Task> {
+
 }

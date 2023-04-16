@@ -1,5 +1,7 @@
 package org.freelance.DAOs;
 
-public class EmployeeDao {
+import org.freelance.models.Employee;
+
+public class EmployeeDao extends AbstractHibernateDao<Employee> {
 
 }

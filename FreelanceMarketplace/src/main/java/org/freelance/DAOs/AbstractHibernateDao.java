@@ -7,21 +7,12 @@ import org.hibernate.Session;
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class AbstractHibernateDao<T extends Serializable> {
-    private Class<T> clazz;
+public abstract class AbstractHibernateDao<T> {
 
-    public final void setClazz(Class<T> clazzToSet) {
-        clazz = Preconditions.checkNotNull(clazzToSet);
-    }
-
-    public T find(long id) {
-        return getCurrentSession().get(clazz, id);
-    }
+    public abstract T find(long id);
 
     @SuppressWarnings("unchecked")
-    public List<T> findAll() {
-        return (List<T>) getCurrentSession().createQuery("FROM " + clazz.getName()).list();
-    }
+    public abstract List<T> findAll();
 
     public T create(T entity) {
         Preconditions.checkNotNull(entity);
