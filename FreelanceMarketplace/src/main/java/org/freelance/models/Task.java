@@ -20,20 +20,20 @@ public class Task {
     @Getter @Setter private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employer_id")
+    @JoinColumn(name = "employer_id", nullable = false)
     @Getter @Setter private Employer employer;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(name = "employee_id", nullable = false)
     @Getter @Setter private Employee employee;
 
     @Column(nullable = false)
     @Getter @Setter private int price;
 
-    @Column(columnDefinition = "boolean default true")
+    @Column(columnDefinition = "boolean default true", nullable = false)
     @Getter @Setter private boolean isFree;
 
-    @Column(columnDefinition = "boolean default false")
+    @Column(columnDefinition = "boolean default false", nullable = false)
     @Getter @Setter private boolean isCompleted;
 
     @Column(length = 10000)
