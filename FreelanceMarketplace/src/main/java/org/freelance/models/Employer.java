@@ -7,6 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -15,24 +17,24 @@ import java.util.List;
 public class Employer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Getter @Setter private long id;
 
     @Column(unique = true, nullable = false)
-    private String login;
+    @Getter @Setter private String login;
 
     @Column(nullable = false)
-    private String password;
+    @Getter @Setter private String password;
 
     @Column(nullable = false)
-    private String name;
+    @Getter @Setter private String name;
 
     @Column(nullable = false)
-    private String surname;
+    @Getter @Setter private String surname;
 
-    private int age;
+    @Getter @Setter private int age;
 
     @Column(length = 10000)
-    private String resume;
+    @Getter @Setter private String resume;
 
     @OneToMany(mappedBy = "tasks")
     private List<Task> tasks;

@@ -9,31 +9,33 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "tasks")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Getter @Setter private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employer_id")
-    private Employer employer;
+    @Getter @Setter private Employer employer;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")
-    private Employee employee;
+    @Getter @Setter private Employee employee;
 
     @Column(nullable = false)
-    private int price;
+    @Getter @Setter private int price;
 
     @Column(columnDefinition = "boolean default true")
-    private boolean isFree;
+    @Getter @Setter private boolean isFree;
 
     @Column(columnDefinition = "boolean default false")
-    private boolean isCompleted;
+    @Getter @Setter private boolean isCompleted;
 
     @Column(length = 10000)
-    private String description;
+    @Getter @Setter private String description;
 }
