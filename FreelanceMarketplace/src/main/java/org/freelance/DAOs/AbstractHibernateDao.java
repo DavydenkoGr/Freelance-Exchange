@@ -4,14 +4,12 @@ import com.google.common.base.Preconditions;
 import org.freelance.HibernateSessionFactoryUtil;
 import org.hibernate.Session;
 
-import java.io.Serializable;
 import java.util.List;
 
 public abstract class AbstractHibernateDao<T> {
 
     public abstract T find(long id);
 
-    @SuppressWarnings("unchecked")
     public abstract List<T> findAll();
 
     public T create(T entity) {
