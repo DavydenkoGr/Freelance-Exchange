@@ -37,6 +37,6 @@ public class Employee {
     @Column(length = 10000)
     @Getter @Setter private String information;
 
-    @OneToMany(mappedBy = "tasks")
+    @OneToMany(mappedBy = "employee")
     private List<Task> tasks;
 }
