@@ -1,3 +1,8 @@
 .idea/
 target/
 *.iml
+
+# Mac stuff:
+.DS_Store
+.AppleDouble
+.LSOverride
