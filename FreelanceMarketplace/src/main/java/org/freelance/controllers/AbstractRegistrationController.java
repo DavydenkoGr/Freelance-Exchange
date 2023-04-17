@@ -1,8 +1,11 @@
 package org.freelance.controllers;
 
+import org.freelance.services.AbstractService;
 import org.springframework.stereotype.Controller;
 
-public abstract class AbstractRegisterController<T extends AbstractService> {
+@SuppressWarnings("rawtypes")
+public abstract class AbstractRegistrationController<T extends AbstractService> {
     protected T service;
+
 
 }
