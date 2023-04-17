@@ -1,4 +1,4 @@
-package services;
+package org.freelance.services;
 
 import org.freelance.DAOs.AbstractHibernateDao;
 
