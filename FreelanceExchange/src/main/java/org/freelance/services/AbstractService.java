@@ -19,8 +19,8 @@ public abstract class AbstractService<T> {
         return DAO.create(entity);
     }
 
-    public T update(T entity) {
-        return DAO.update(entity);
+    public void update(T entity) {
+        DAO.update(entity);
     }
 
     public void delete(T entity) {

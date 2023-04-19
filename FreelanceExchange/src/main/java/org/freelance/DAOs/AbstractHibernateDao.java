@@ -17,14 +17,14 @@ public abstract class AbstractHibernateDao<T> {
         return entity;
     }
 
-    public T update(T entity) {
+    public void update(T entity) {
         Preconditions.checkNotNull(entity);
-        return getCurrentSession().merge(entity);
+        getCurrentSession().update(entity);
     }
 
     public void delete(T entity) {
         Preconditions.checkNotNull(entity);
-        getCurrentSession().remove(entity);
+        getCurrentSession().delete(entity);
     }
 
     public void delete(long id) {
