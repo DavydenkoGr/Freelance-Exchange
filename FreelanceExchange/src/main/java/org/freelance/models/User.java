@@ -21,7 +21,7 @@ public class User {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", nullable = false)
-    @Getter @Setter private int role;
+    @Getter @Setter private Role role;
 
     @Column(nullable = false)
     @Getter @Setter private String name;
@@ -40,6 +40,9 @@ public class User {
     @Column(length = 10000)
     @Getter @Setter private String information;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "employer")
     private List<Task> tasks;
+
+    @OneToMany(mappedBy = "employee")
+    private List<Task> offers;
 }
