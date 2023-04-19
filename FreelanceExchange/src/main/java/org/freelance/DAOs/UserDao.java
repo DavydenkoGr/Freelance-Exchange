@@ -4,7 +4,7 @@ import org.freelance.models.User;
 
 import java.util.List;
 
-public class EmployeeDao extends AbstractHibernateDao<User> {
+public class UserDao extends AbstractHibernateDao<User> {
     @Override
     public User find(long id) {
         return getCurrentSession().get(User.class, id);
