@@ -1,18 +1,18 @@
 package org.freelance.DAOs;
 
-import org.freelance.models.Employee;
+import org.freelance.models.User;
 
 import java.util.List;
 
-public class EmployeeDao extends AbstractHibernateDao<Employee> {
+public class EmployeeDao extends AbstractHibernateDao<User> {
     @Override
-    public Employee find(long id) {
-        return getCurrentSession().get(Employee.class, id);
+    public User find(long id) {
+        return getCurrentSession().get(User.class, id);
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Employee> findAll() {
-        return (List<Employee>) getCurrentSession().createQuery("FROM employees").list();
+    public List<User> findAll() {
+        return (List<User>) getCurrentSession().createQuery("FROM users").list();
     }
 }
