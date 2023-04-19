@@ -5,5 +5,9 @@ import org.freelance.DAOs.UserDao;
 import org.freelance.models.User;
 
 public class UserService extends AbstractService<User> {
-    protected AbstractHibernateDao<User> DAO = new UserDao();
+    protected UserDao DAO = new UserDao();
+
+    public User find(String login) {
+        return DAO.find(login);
+    }
 }
