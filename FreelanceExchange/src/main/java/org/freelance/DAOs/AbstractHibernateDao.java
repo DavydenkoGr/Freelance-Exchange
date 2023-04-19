@@ -7,7 +7,6 @@ import org.hibernate.Session;
 import java.util.List;
 
 public abstract class AbstractHibernateDao<T> {
-
     public abstract T find(long id);
 
     public abstract List<T> findAll();

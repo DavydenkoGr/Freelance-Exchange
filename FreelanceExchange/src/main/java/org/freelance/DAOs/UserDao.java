@@ -1,9 +1,11 @@
 package org.freelance.DAOs;
 
 import org.freelance.models.User;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class UserDao extends AbstractHibernateDao<User> {
     @Override
     public User find(long id) {
