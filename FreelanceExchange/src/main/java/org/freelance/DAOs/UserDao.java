@@ -23,4 +23,16 @@ public class UserDao extends AbstractHibernateDao<User> {
     public List<User> findAll() {
         return (List<User>) getCurrentSession().createQuery("FROM users").list();
     }
+
+    @SuppressWarnings("unchecked")
+    public List<User> findByRole(String role) {
+        StringBuilder query = new StringBuilder();
+
+        query
+                .append("SELECT * FROM users WHERE role_id = (SELECT id FROM roles WHERE name = '")
+                .append(role.toLowerCase())
+                .append("')");
+
+        return (List<User>) getCurrentSession().createQuery(query.toString()).list();
+    }
 }
