@@ -20,11 +20,11 @@ public class Task {
     @Getter @Setter private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employer_id")
+    @JoinColumn(name = "employer_id", nullable = false)
     @Getter @Setter private User employer;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id", nullable = false)
+    @JoinColumn(name = "employee_id")
     @Getter @Setter private User employee;
 
     @Column(nullable = false)
