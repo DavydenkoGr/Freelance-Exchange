@@ -20,12 +20,12 @@ public class Task {
     @Getter @Setter private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employer_id")
-    @Getter @Setter private Employer employer;
+    @JoinColumn(name = "employer_id", nullable = false)
+    @Getter @Setter private User employer;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id", nullable = false)
-    @Getter @Setter private Employee employee;
+    @JoinColumn(name = "employee_id")
+    @Getter @Setter private User employee;
 
     @Column(nullable = false)
     @Getter @Setter private int price;

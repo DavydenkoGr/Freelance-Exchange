@@ -1,9 +1,11 @@
 package org.freelance.DAOs;
 
 import org.freelance.models.Task;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class TaskDao extends AbstractHibernateDao<Task> {
     @Override
     public Task find(long id) {
