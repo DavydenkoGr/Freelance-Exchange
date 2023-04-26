@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
+    <h1>register employee</h1>
+    <form th:action=”@{/profile}” th:object="${user}" th:method="POST">
+        <div>
+            <label>Login</label>
+            <input type=”text” th:field=”*{login}”/>
+        </div>
+        <div>
+            <label>Password</label>
+            <input type=”text” th:field=”*{password}”/>
+        </div>
+        <div>
+            <label>Name</label>
+            <input type=”text” th:field=”*{name}”/>
+        </div>
+        <div>
+            <label>Surname</label>
+            <input type=”text” th:field=”*{surname}”/>
+        </div>
+        <div>
+            <label>Age</label>
+            <input type=”number” th:field=”*{age}”/>
+        </div>
+        <button type="submit">register</button>
+    </form>
 </body>
 </html>
