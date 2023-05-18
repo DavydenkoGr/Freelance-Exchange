@@ -4,7 +4,6 @@ import org.freelance.DAOs.UserDao;
 import org.freelance.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

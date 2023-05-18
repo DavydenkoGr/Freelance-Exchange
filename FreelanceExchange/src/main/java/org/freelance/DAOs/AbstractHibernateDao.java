@@ -3,15 +3,15 @@ package org.freelance.DAOs;
 import java.util.List;
 
 public interface AbstractHibernateDao<T> {
-    public abstract T find(long id);
+    T find(long id);
 
-    public abstract List<T> findAll();
+    List<T> findAll();
 
-    public T create(T entity);
+    T create(T entity);
 
-    public void update(T entity);
+    void update(T entity);
 
-    public void delete(T entity);
+    void delete(T entity);
 
-    public void delete(long id);
+    void delete(long id);
 }

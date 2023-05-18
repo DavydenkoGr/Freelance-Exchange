@@ -23,7 +23,6 @@ public class HibernateSessionFactoryUtil {
                     new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build()
             );
 
-
         } catch (Exception exception) {
             throw new RuntimeException("cannot create db session");
         }
