@@ -8,31 +8,24 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.springframework.context.annotation.Bean;
 
+@org.springframework.context.annotation.Configuration
 public class HibernateSessionFactoryUtil {
-    private static SessionFactory sessionFactory;
-
-    private HibernateSessionFactoryUtil() {
-    }
-
-    @Bean
+    @Bean(name="entityManagerFactory")
     public static SessionFactory getSessionFactory() {
-        if (sessionFactory == null) {
-            try {
-                Configuration configuration = new Configuration().configure();
+        try {
+            Configuration configuration = new Configuration().configure();
 
-                configuration.addAnnotatedClass(Role.class);
-                configuration.addAnnotatedClass(User.class);
-                configuration.addAnnotatedClass(Task.class);
+            configuration.addAnnotatedClass(Role.class);
+            configuration.addAnnotatedClass(User.class);
+            configuration.addAnnotatedClass(Task.class);
 
-                sessionFactory = configuration.buildSessionFactory(
-                        new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build()
-                );
+            return configuration.buildSessionFactory(
+                    new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build()
+            );
 
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
+
+        } catch (Exception exception) {
+            throw new RuntimeException("cannot create db session");
         }
-
-        return sessionFactory;
     }
 }

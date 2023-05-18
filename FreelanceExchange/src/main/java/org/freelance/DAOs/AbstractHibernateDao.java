@@ -1,10 +1,5 @@
 package org.freelance.DAOs;
 
-import com.google.common.base.Preconditions;
-import org.freelance.HibernateSessionFactoryUtil;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 import java.util.List;
 
 public interface AbstractHibernateDao<T> {
