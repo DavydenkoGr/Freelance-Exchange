@@ -2,6 +2,7 @@ package org.freelance.DAOs;
 
 import com.google.common.base.Preconditions;
 import jakarta.transaction.Transactional;
+import org.freelance.models.Role;
 import org.freelance.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,32 +20,39 @@ public class UserDao implements AbstractHibernateDao<User> {
 
     @Override
     public User find(long id) {
-        return sessionFactory.getCurrentSession().get(User.class, id);
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        User response = session.get(User.class, id);
+        transaction.commit();
+        return response;
     }
 
-    public User find(String login) {
-        return (User) sessionFactory.getCurrentSession().createQuery(
-                "SELECT 1 FROM users WHERE login = login"
-        ).getSingleResult();
-    }
+//    public User find(String login) {
+//        return (User) sessionFactory.getCurrentSession().createQuery(
+//                "SELECT 1 FROM User WHERE login = login"
+//        ).getSingleResult();
+//    }
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<User> findAll() {
-        return (List<User>) sessionFactory.getCurrentSession().createQuery("FROM users").list();
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        List<User> response = session.createQuery("SELECT a FROM User a", User.class).getResultList();
+        transaction.commit();
+        return response;
     }
 
-    @SuppressWarnings("unchecked")
-    public List<User> findByRole(String role) {
-        StringBuilder query = new StringBuilder();
-
-        query
-                .append("SELECT * FROM users WHERE role_id = (SELECT id FROM roles WHERE name = '")
-                .append(role.toLowerCase())
-                .append("')");
-
-        return (List<User>) sessionFactory.getCurrentSession().createQuery(query.toString()).list();
-    }
+//    @SuppressWarnings("unchecked")
+//    public List<User> findByRole(String role) {
+//        StringBuilder query = new StringBuilder();
+//
+//        query
+//                .append("SELECT * FROM users WHERE role_id = (SELECT id FROM roles WHERE name = '")
+//                .append(role.toLowerCase())
+//                .append("')");
+//
+//        return (List<User>) sessionFactory.getCurrentSession().createQuery(query.toString()).list();
+//    }
 
     @Override
     public User create(User entity) {

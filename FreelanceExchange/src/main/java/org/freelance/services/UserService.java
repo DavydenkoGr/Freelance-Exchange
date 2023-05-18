@@ -11,13 +11,13 @@ public class UserService implements AbstractService<User> {
     @Autowired
     protected UserDao DAO;
 
-    public User find(String login) {
-        return DAO.find(login);
-    }
-
-    public List<User> findByRole(String role) {
-        return DAO.findByRole(role);
-    }
+//    public User find(String login) {
+//        return DAO.find(login);
+//    }
+//
+//    public List<User> findByRole(String role) {
+//        return DAO.findByRole(role);
+//    }
 
     @Override
     public User find(long id) {

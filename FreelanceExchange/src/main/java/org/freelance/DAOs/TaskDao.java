@@ -8,7 +8,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
@@ -19,27 +18,40 @@ public class TaskDao implements AbstractHibernateDao<Task> {
 
     @Override
     public Task find(long id) {
-        return sessionFactory.getCurrentSession().get(Task.class, id);
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        Task response = session.get(Task.class, id);
+        transaction.commit();
+        return response;
     }
 
-    @SuppressWarnings("unchecked")
-    public List<Task> findByEmployerId(long id) {
-        return (List<Task>) sessionFactory.getCurrentSession().createQuery(
-                "SELECT * FROM tasks WHERE employer_id = " + id
-        ).list();
-    }
+//    public List<Task> findByEmployerId(long id) {
+//        Session session = sessionFactory.getCurrentSession();
+//        Transaction transaction = session.beginTransaction();
+//        List<Task> response = session.createQuery(
+//                "SELECT a FROM Task WHERE employer_id = " + id, Task.class
+//        ).getResultList();
+//        transaction.commit();
+//        return response;
+//    }
 
-    @SuppressWarnings("unchecked")
-    public List<Task> findByEmployeeId(long id) {
-        return (List<Task>) sessionFactory.getCurrentSession().createQuery(
-                "SELECT * FROM tasks WHERE employee_id = " + id
-        ).list();
-    }
+//    public List<Task> findByEmployeeId(long id) {
+//        Session session = sessionFactory.getCurrentSession();
+//        Transaction transaction = session.beginTransaction();
+//        List<Task> response = session.createQuery(
+//                "SELECT a FROM Task WHERE employee_id = " + id, Task.class
+//        ).getResultList();
+//        transaction.commit();
+//        return response;
+//    }
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<Task> findAll() {
-        return (List<Task>) sessionFactory.getCurrentSession().createQuery("SELECT * FROM tasks").list();
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        List<Task> response = session.createQuery("SELECT a FROM Task a", Task.class).getResultList();
+        transaction.commit();
+        return response;
     }
 
     @Override
