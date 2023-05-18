@@ -19,13 +19,20 @@ public class RoleDao implements AbstractHibernateDao<Role> {
 
     @Override
     public Role find(long id) {
-        return sessionFactory.getCurrentSession().get(Role.class, id);
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        Role response = session.get(Role.class, id);
+        transaction.commit();
+        return response;
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<Role> findAll() {
-        return (List<Role>) sessionFactory.getCurrentSession().createQuery("FROM role").list();
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        List<Role> response = session.createQuery("SELECT a FROM Role a", Role.class).getResultList();
+        transaction.commit();
+        return response;
     }
 
     @Override
