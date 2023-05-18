@@ -19,6 +19,9 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter private long id;
 
+    @Column(nullable = false)
+    @Getter @Setter String name;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employer_id", nullable = false)
     @Getter @Setter private User employer;
