@@ -27,31 +27,36 @@ public class UserDao implements AbstractHibernateDao<User> {
         return response;
     }
 
-//    public User find(String login) {
-//        return (User) sessionFactory.getCurrentSession().createQuery(
-//                "SELECT 1 FROM User WHERE login = login"
-//        ).getSingleResult();
-//    }
+    public User find(String login) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        User response = session.createQuery(
+                "SELECT u FROM User u WHERE u.login = '" + login + "'", User.class
+        ).getSingleResult();
+        transaction.commit();
+        return response;
+    }
 
     @Override
     public List<User> findAll() {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        List<User> response = session.createQuery("SELECT a FROM User a", User.class).getResultList();
+        List<User> response = session.createQuery("SELECT u FROM User u", User.class).getResultList();
         transaction.commit();
         return response;
     }
 
-//    @SuppressWarnings("unchecked")
 //    public List<User> findByRole(String role) {
-//        StringBuilder query = new StringBuilder();
+//        Session session = sessionFactory.getCurrentSession();
+//        Transaction transaction = session.beginTransaction();
 //
-//        query
-//                .append("SELECT * FROM users WHERE role_id = (SELECT id FROM roles WHERE name = '")
-//                .append(role.toLowerCase())
-//                .append("')");
+//        String query = "SELECT u FROM User u WHERE u.role_id = (SELECT r.id FROM Role r WHERE r.name = '" +
+//                role.toLowerCase() +
+//                "')";
 //
-//        return (List<User>) sessionFactory.getCurrentSession().createQuery(query.toString()).list();
+//        List<User> response = session.createQuery(query, User.class).getResultList();
+//        transaction.commit();
+//        return response;
 //    }
 
     @Override

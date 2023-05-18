@@ -30,7 +30,7 @@ public class RoleDao implements AbstractHibernateDao<Role> {
     public List<Role> findAll() {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        List<Role> response = session.createQuery("SELECT a FROM Role a", Role.class).getResultList();
+        List<Role> response = session.createQuery("SELECT r FROM Role r", Role.class).getResultList();
         transaction.commit();
         return response;
     }
