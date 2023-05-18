@@ -6,6 +6,7 @@ import org.freelance.models.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.springframework.context.annotation.Bean;
 
 public class HibernateSessionFactoryUtil {
     private static SessionFactory sessionFactory;
@@ -13,6 +14,7 @@ public class HibernateSessionFactoryUtil {
     private HibernateSessionFactoryUtil() {
     }
 
+    @Bean
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {

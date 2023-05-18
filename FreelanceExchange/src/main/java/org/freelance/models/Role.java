@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,6 +17,8 @@ public class Role {
     @Column(nullable = false, unique = true)
     @Getter @Setter private String name;
 
-    @OneToMany(mappedBy = "role")
-    private List<User> users;
+    @OneToMany(mappedBy = "role",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<User> users = new ArrayList<>();
 }
