@@ -1,6 +1,5 @@
 package org.freelance.controllers;
 
-import jakarta.persistence.NoResultException;
 import org.freelance.models.User;
 import org.freelance.services.RoleService;
 import org.freelance.services.UserService;
