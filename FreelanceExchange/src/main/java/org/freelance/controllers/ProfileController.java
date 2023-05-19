@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @Controller
 public class ProfileController {
     @GetMapping("profile")
-    public String profile(Model model, @ModelAttribute("user") User user) {
-        // Поиск юзера
-        model.addAttribute("user", user);
+    public String profile(Model model) {
         return "profile";
     }
 }

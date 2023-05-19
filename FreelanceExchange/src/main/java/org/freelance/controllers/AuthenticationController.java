@@ -4,6 +4,7 @@ import org.freelance.models.User;
 import org.freelance.services.RoleService;
 import org.freelance.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,11 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("authentication")
 public class AuthenticationController {
     @Autowired
-    UserService userService;
+    private UserService userService;
     @Autowired
-    RoleService roleService;
+    private RoleService roleService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/login")
+
+    @GetMapping("login")
     public String login(Model model) {
         return "login-form";
     }
@@ -33,7 +37,6 @@ public class AuthenticationController {
     @GetMapping("employee/registration")
     public String employeeRegistration(Model model) {
         User user = new User();
-        user.setRole(roleService.find(2));
         model.addAttribute("user", user);
         return "employee-registration-form";
     }
@@ -52,6 +55,7 @@ public class AuthenticationController {
         }
 
         user.setRole(roleService.find(2));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.create(user);
 
         return "redirect:authentication/employee/login";
