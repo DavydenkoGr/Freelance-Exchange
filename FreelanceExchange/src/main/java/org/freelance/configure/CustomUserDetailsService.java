@@ -1,5 +1,6 @@
 package org.freelance.configure;
 
+import org.freelance.models.Role;
 import org.freelance.models.User;
 import org.freelance.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -22,17 +24,20 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.find(username);
-        String role = user.getRole().getName();
 
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-
-        if (role.equals("employer")) {
-            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYER"));
-        } else if (role.equals("employee")) {
-            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYEE"));
+        if (user == null) {
+            throw new UsernameNotFoundException("Cannot find user by name " + username);
         }
 
         return new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(),
-                grantedAuthorities);
+                mapRolesToAuthorities(Arrays.asList(user.getRole())));
+    }
+
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority(
+                        "ROLE_" + role.getName().toUpperCase()
+                ))
+                .collect(Collectors.toList());
     }
 }
