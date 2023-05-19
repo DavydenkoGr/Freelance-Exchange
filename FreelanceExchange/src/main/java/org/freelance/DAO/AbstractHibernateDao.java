@@ -1,4 +1,4 @@
-package org.freelance.DAOs;
+package org.freelance.DAO;
 
 import java.util.List;
 

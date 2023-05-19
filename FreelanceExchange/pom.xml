@@ -12,7 +12,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-boot-version>3.0.5</spring-boot-version>
         <spring-security-version>6.0.3</spring-security-version>
-        <jacarta-persistence-version>3.1.0</jacarta-persistence-version>
+        <jakarta-persistence-version>3.1.0</jakarta-persistence-version>
+        <jakarta-validation-version>3.0.2</jakarta-validation-version>
     </properties>
 
     <dependencies>
@@ -61,8 +62,14 @@
         <dependency>
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
-            <version>${jacarta-persistence-version}</version>
+            <version>${jakarta-persistence-version}</version>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>jakarta.validation</groupId>-->
+<!--            <artifactId>jakarta.validation-api</artifactId>-->
+<!--            <version>${jakarta-validation-version}</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>com.h2database</groupId>

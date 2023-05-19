@@ -1,6 +1,6 @@
 package org.freelance.services;
 
-import org.freelance.DAOs.UserDao;
+import org.freelance.DAO.UserDao;
 import org.freelance.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

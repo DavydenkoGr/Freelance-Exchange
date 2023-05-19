@@ -1,4 +1,4 @@
-package org.freelance.DAOs;
+package org.freelance.DAO;
 
 import com.google.common.base.Preconditions;
 import jakarta.transaction.Transactional;
