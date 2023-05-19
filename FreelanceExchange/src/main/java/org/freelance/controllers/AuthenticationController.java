@@ -21,14 +21,9 @@ public class AuthenticationController {
     @Autowired
     RoleService roleService;
 
-    @GetMapping("employer/login")
-    public String employerLogin(Model model) {
-        return "employer-login-form";
-    }
-
-    @GetMapping("employee/login")
-    public String employeeLogin(Model model) {
-        return "employer-login-form";
+    @GetMapping("/login")
+    public String login(Model model) {
+        return "login-form";
     }
 
     @GetMapping("employer/registration")
