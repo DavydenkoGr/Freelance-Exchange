@@ -6,26 +6,36 @@
 </head>
 <body>
     <h1>register employee</h1>
-    <form th:action=”@{/profile}” th:object="${user}" th:method="POST">
+    <form method="POST" role="form" th:action="@{/authentication/employee/registration/save}" th:object="${user}">
         <div>
             <label>Login</label>
-            <input type=”text” th:field=”*{login}”/>
+            <label>
+                <input type="text" th:field="*{login}"/>
+            </label>
         </div>
         <div>
             <label>Password</label>
-            <input type=”text” th:field=”*{password}”/>
+            <label>
+                <input type="text" th:field="*{password}"/>
+            </label>
         </div>
         <div>
             <label>Name</label>
-            <input type=”text” th:field=”*{name}”/>
+            <label>
+                <input type="text" th:field="*{name}"/>
+            </label>
         </div>
         <div>
             <label>Surname</label>
-            <input type=”text” th:field=”*{surname}”/>
+            <label>
+                <input type="text" th:field="*{surname}"/>
+            </label>
         </div>
         <div>
             <label>Age</label>
-            <input type=”number” th:field=”*{age}”/>
+            <label>
+                <input type="number" th:field="*{age}"/>
+            </label>
         </div>
         <button type="submit">register</button>
     </form>

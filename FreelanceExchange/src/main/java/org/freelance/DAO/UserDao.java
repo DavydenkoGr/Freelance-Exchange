@@ -1,6 +1,7 @@
 package org.freelance.DAO;
 
 import com.google.common.base.Preconditions;
+import jakarta.persistence.NoResultException;
 import jakarta.transaction.Transactional;
 import org.freelance.models.User;
 import org.hibernate.Session;
@@ -29,9 +30,16 @@ public class UserDao implements AbstractHibernateDao<User> {
     public User find(String login) {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        User response = session.createQuery(
-                "SELECT u FROM User u WHERE u.login = '" + login + "'", User.class
-        ).getSingleResult();
+
+        User response = null;
+        try {
+            response = session.createQuery(
+                    "SELECT u FROM User u WHERE u.login = '" + login + "'", User.class
+            ).getSingleResult();
+        } catch (NoResultException exception) {
+            // This is expected
+        }
+
         transaction.commit();
         return response;
     }

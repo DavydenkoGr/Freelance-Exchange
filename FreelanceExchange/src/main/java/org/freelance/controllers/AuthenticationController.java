@@ -1,12 +1,16 @@
 package org.freelance.controllers;
 
+import jakarta.persistence.NoResultException;
 import org.freelance.models.User;
 import org.freelance.services.RoleService;
 import org.freelance.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -38,5 +42,24 @@ public class AuthenticationController {
         user.setRole(roleService.find(2));
         model.addAttribute("user", user);
         return "employee-registration-form";
+    }
+
+    @PostMapping("employee/registration/save")
+    public String employeeRegistrationSave(@ModelAttribute("user") User user, BindingResult result, Model model) {
+        User existingUser = userService.find(user.getLogin());
+
+        if (existingUser != null) {
+            result.rejectValue("login", "1", "Login exists");
+        }
+
+        if (result.hasErrors()) {
+            model.addAttribute(user);
+            return "authentication/employee/registration";
+        }
+
+        user.setRole(roleService.find(2));
+        userService.create(user);
+
+        return "redirect:authentication/employee/login";
     }
 }
