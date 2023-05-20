@@ -52,6 +52,10 @@ public class AuthenticationController {
             result.rejectValue("login", "1", "Login exists");
         }
 
+        if (user.getName().equals("anonymousUser")) {
+            result.rejectValue("login", "2", "Forbidden login");
+        }
+
         if (result.hasErrors()) {
             model.addAttribute(user);
             return "authentication/employee/registration";
