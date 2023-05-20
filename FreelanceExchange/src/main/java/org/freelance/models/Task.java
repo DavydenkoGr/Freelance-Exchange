@@ -22,11 +22,11 @@ public class Task {
     @Column(nullable = false)
     @Getter @Setter String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employer_id", nullable = false)
     @Getter @Setter private User employer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id")
     @Getter @Setter private User employee;
 

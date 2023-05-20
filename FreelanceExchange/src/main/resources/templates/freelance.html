@@ -11,8 +11,19 @@
 <body>
     <div th:insert="fragments/header :: header"> </div>
     <main role="main" class="container">
-        <div th:each="task: ${tasks}">
-            <a th:text="${task.name}"></a>
+        <div class="container" th:each="task: ${tasks}">
+
+            <div class="bg-light border" style="margin-top: 30px; padding: 10px;">
+                <div class="row row-cols-2">
+                    <div class="col" style="margin-top: 5px;" th:text="${task.name}"></div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-top: 5px;" th:text="'Amount: ' + ${task.price} + '$'"></div>
+                    <div class="col" style="margin-top: 10px;" th:text="'Employer: ' + ${task.employer.surname} + ' ' + ${task.employer.name}"></div>
+                </div>
+                <div class="d-grid gap-2" style="margin-top: 10px;">
+                    <a class="btn btn-success" href="#" role="button">Watch</a>
+                </div>
+            </div>
+
         </div>
     </main>
 </body>
