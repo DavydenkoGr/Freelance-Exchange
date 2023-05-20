@@ -29,7 +29,7 @@ public class SecurityConfigurer {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/authentication/**").permitAll()
+                        authorize.requestMatchers("/authentication/**", "/freelance").permitAll()
                                 .requestMatchers("/profile").permitAll()
                                 .requestMatchers("tasks/create_task").hasRole("EMPLOYEE")
                 ).formLogin(
