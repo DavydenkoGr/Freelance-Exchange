@@ -31,17 +31,21 @@ public class AuthenticationController {
 
     @GetMapping("employer/registration")
     public String employerRegistration(Model model) {
+        User user = new User();
+        user.setRole(roleService.find(1));
+        model.addAttribute("user", user);
         return "employer-registration-form";
     }
 
     @GetMapping("employee/registration")
     public String employeeRegistration(Model model) {
         User user = new User();
+        user.setRole(roleService.find(2));
         model.addAttribute("user", user);
         return "employee-registration-form";
     }
 
-    @PostMapping("employee/registration/save")
+    @PostMapping("registration/save")
     public String employeeRegistrationSave(@ModelAttribute("user") User user, BindingResult result, Model model) {
         User existingUser = userService.find(user.getLogin());
 
@@ -54,10 +58,9 @@ public class AuthenticationController {
             return "authentication/employee/registration";
         }
 
-        user.setRole(roleService.find(2));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.create(user);
 
-        return "redirect:authentication/employee/login";
+        return "redirect:authentication/login";
     }
 }
