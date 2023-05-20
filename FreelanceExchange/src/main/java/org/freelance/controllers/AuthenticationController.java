@@ -23,7 +23,6 @@ public class AuthenticationController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
     @GetMapping("login")
     public String login(Model model) {
         return "login-form";
