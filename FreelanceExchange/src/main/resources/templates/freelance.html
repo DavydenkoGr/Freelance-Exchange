@@ -20,7 +20,7 @@
                     <div class="col" style="margin-top: 10px;" th:text="'Employer: ' + ${task.employer.surname} + ' ' + ${task.employer.name}"></div>
                 </div>
                 <div class="d-grid gap-2" style="margin-top: 10px;">
-                    <a class="btn btn-success" href="#" role="button">Watch</a>
+                    <a class="btn btn-success" th:href="@{/tasks/task(id=${task.id})}" role="button">Watch</a>
                 </div>
             </div>
 
