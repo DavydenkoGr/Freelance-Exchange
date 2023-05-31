@@ -28,19 +28,21 @@
 <body>
     <div th:insert="fragments/header :: header"> </div>
     <main role="main" class="container">
-        <div class="container" th:each="task: ${tasks}">
+        <div class="row row-cols-1 row-cols-md-2 g-4" style="margin-top: 20px;">
+            <div class="col" th:each="task: ${tasks}">
 
-            <div class="bg-light border" style="margin-top: 30px; padding: 10px;">
-                <div class="row row-cols-2">
-                    <div class="col" style="margin-top: 5px;" th:text="${task.name}"></div>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-top: 5px;" th:text="'Amount: ' + ${task.price} + '$'"></div>
-                    <div class="col" style="margin-top: 10px;" th:text="'Employer: ' + ${task.employer.surname} + ' ' + ${task.employer.name}"></div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${task.name}"></h5>
+                        <h6 class="card-subtitle mb-2 text-muted" th:text="'Amount: ' + ${task.price} + '$'"></h6>
+                        <p class="card-text" th:text="'Employer: ' + ${task.employer.surname} + ' ' + ${task.employer.name}"></p>
+                        <div class="d-grid gap-2" style="margin-top: 10px;">
+                            <a class="btn btn-primary" th:href="@{/tasks/task(id=${task.id})}" role="button">Watch</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="d-grid gap-2" style="margin-top: 10px;">
-                    <a class="btn btn-success" th:href="@{/tasks/task(id=${task.id})}" role="button">Watch</a>
-                </div>
+
             </div>
-
         </div>
     </main>
     <div th:insert="fragments/footer :: footer"></div>
