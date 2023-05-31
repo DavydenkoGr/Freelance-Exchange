@@ -31,7 +31,7 @@ public class AuthenticationController {
     @GetMapping("employer/registration")
     public String employerRegistration(Model model) {
         User user = new User();
-        user.setRole(roleService.find(1));
+        user.setRoleId(1);
         model.addAttribute("user", user);
         return "employer-registration-form";
     }
@@ -39,7 +39,7 @@ public class AuthenticationController {
     @GetMapping("employee/registration")
     public String employeeRegistration(Model model) {
         User user = new User();
-        user.setRole(roleService.find(2));
+        user.setRoleId(2);
         model.addAttribute("user", user);
         return "employee-registration-form";
     }
@@ -61,6 +61,7 @@ public class AuthenticationController {
             return "authentication/employee/registration";
         }
 
+        user.setRole(roleService.find(user.getRoleId()));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.create(user);
 
