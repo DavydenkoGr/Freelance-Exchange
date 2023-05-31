@@ -30,8 +30,8 @@ public class SecurityConfigurer {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/authentication/**", "/freelance", "/tasks/task").permitAll()
-                                .requestMatchers("/profile").permitAll()
-                                .requestMatchers("tasks/create_task").hasRole("EMPLOYEE")
+                                .requestMatchers("/profile").authenticated()
+                                .requestMatchers("tasks/**").hasAuthority("EMPLOYER")
                 ).formLogin(
                         form -> form
                                 .loginPage("/authentication/login")
@@ -40,7 +40,7 @@ public class SecurityConfigurer {
                                 .permitAll()
                 ).logout(
                         logout -> logout
-                                .logoutRequestMatcher(new AntPathRequestMatcher("authentication/logout"))
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                                 .permitAll()
                 );
         return http.build();

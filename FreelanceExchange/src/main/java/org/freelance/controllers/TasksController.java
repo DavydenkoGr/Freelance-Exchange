@@ -9,9 +9,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("tasks")
@@ -33,8 +32,28 @@ public class TasksController {
         return "task";
     }
 
-    @GetMapping("create_task")
+    @GetMapping("create-task")
     public String createTask(Model model) {
+        Task task = new Task();
+
+        model.addAttribute("task", task);
         return "create-task";
+    }
+
+    @PostMapping("create-task/save")
+    public String saveTask(@ModelAttribute("task") Task task, BindingResult result, Model model) {
+        System.out.println(0);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.find(authentication.getName());
+
+        if (result.hasErrors()) {
+            System.out.println(1);
+            return "create-task";
+        }
+
+        task.setEmployer(user);
+        taskService.create(task);
+        System.out.println(2);
+        return "redirect:/profile";
     }
 }
