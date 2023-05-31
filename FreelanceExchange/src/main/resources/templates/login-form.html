@@ -27,26 +27,28 @@
 </head>
 <body>
     <div th:insert="fragments/header :: header"> </div>
-    <main role="main" class="container">
-        <h1>Sign in</h1>
-        <form method="POST" role="form" th:action="@{/authentication/login}">
-            <div class="mb-3 row">
-                <label for="username" class="col-sm-2 col-form-label">Login</label>
-                <div class="col-sm-10">
-                    <input class="form-control" type="text"  id="username" name="username" placeholder="your login">
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+            <h1>Sign in</h1>
+            <form method="POST" role="form" th:action="@{/authentication/login}">
+                <div class="mb-3 row">
+                    <label for="username" class="col-sm-2 col-form-label">Login</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text"  id="username" name="username" placeholder="your login">
+                    </div>
                 </div>
-            </div>
-            <div class="mb-3 row">
-                <label for="password" class="col-sm-2 col-form-label">Password</label>
-                <div class="col-sm-10">
-                    <input class="form-control" type="password" id="password" name="password" placeholder="your password"/>
+                <div class="mb-3 row">
+                    <label for="password" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="password" id="password" name="password" placeholder="your password"/>
+                    </div>
                 </div>
-            </div>
-            <div class="d-grid gap-2">
-                <button class="btn btn-primary" type="submit">Confirm</button>
-            </div>
-        </form>
-    </main>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="submit">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </section>
     <div th:insert="fragments/footer :: footer"></div>
 
     <!-- Bootstrap5 -->

@@ -27,24 +27,26 @@
 </head>
 <body>
     <div th:insert="fragments/header :: header"> </div>
-    <main role="main" class="container">
-        <div class="row row-cols-1 row-cols-md-2 g-4" style="margin-top: 10px;">
-            <div class="col" th:each="task: ${tasks}">
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col" th:each="task: ${tasks}">
 
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${task.name}"></h5>
-                        <h6 class="card-subtitle mb-2 text-muted" th:text="'Amount: ' + ${task.price} + '$'"></h6>
-                        <p class="card-text" th:text="'Employer: ' + ${task.employer.surname} + ' ' + ${task.employer.name}"></p>
-                        <div class="d-grid gap-2" style="margin-top: 10px;">
-                            <a class="btn btn-primary" th:href="@{/tasks/task(id=${task.id})}" role="button">Watch</a>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${task.name}"></h5>
+                            <h6 class="card-subtitle mb-2 text-muted" th:text="'Amount: ' + ${task.price} + '$'"></h6>
+                            <p class="card-text" th:text="'Employer: ' + ${task.employer.surname} + ' ' + ${task.employer.name}"></p>
+                            <div class="d-grid gap-2" style="margin-top: 10px;">
+                                <a class="btn btn-primary" th:href="@{/tasks/task(id=${task.id})}" role="button">Watch</a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
-    </main>
+    </section>
     <div th:insert="fragments/footer :: footer"></div>
 
     <!-- Bootstrap5 -->

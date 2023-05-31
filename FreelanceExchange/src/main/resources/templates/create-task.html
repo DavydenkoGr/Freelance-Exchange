@@ -26,32 +26,34 @@
     <title>New task</title>
 </head>
 <body>
-    <div th:insert="fragments/header :: header"> </div>
-    <main role="main" class="container">
-        <h1>New task</h1>
-        <form method="POST" role="form" th:action="@{/tasks/create-task/save}" th:object="${task}">
-    
-            <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input class="form-control" type="text" id="name" name="name" placeholder="task name" th:field="*{name}"/>
-            </div>
-    
-            <div class="mb-3">
-                <label for="price" class="form-label">Price</label>
-                <input class="form-control" type="number" id="price" name="price" placeholder="money amount" th:field="*{price}"/>
-            </div>
-    
-            <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description" placeholder="description for your task" th:field="*{description}"></textarea>
-            </div>
-    
-            <div class="d-grid gap-2">
-                <button class="btn btn-primary" type="submit">Add task</button>
-            </div>
-    
-        </form>
-    </main>
+    <div th:insert="fragments/header :: header"></div>
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+            <h1>New task</h1>
+            <form method="POST" role="form" th:action="@{/tasks/create-task/save}" th:object="${task}">
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input class="form-control" type="text" id="name" name="name" placeholder="task name" th:field="*{name}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input class="form-control" type="number" id="price" name="price" placeholder="money amount" th:field="*{price}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" name="description" placeholder="description for your task" th:field="*{description}"></textarea>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="submit">Add task</button>
+                </div>
+
+            </form>
+        </div>
+    </section>
     <div th:insert="fragments/footer :: footer"></div>
 
     <!-- Bootstrap5 -->
