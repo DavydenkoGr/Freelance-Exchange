@@ -1,5 +1,7 @@
 package org.freelance.controllers;
 
+import jakarta.validation.Valid;
+import org.freelance.forms.RegistrationForm;
 import org.freelance.models.User;
 import org.freelance.services.RoleService;
 import org.freelance.services.UserService;
@@ -24,49 +26,57 @@ public class AuthenticationController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("login")
-    public String login(Model model) {
+    public String login() {
         return "login-form";
     }
 
     @GetMapping("employer/registration")
     public String employerRegistration(Model model) {
-        User user = new User();
-        user.setRoleId(1);
+        RegistrationForm form = new RegistrationForm();
+        form.setRoleId(1);
 
-        model.addAttribute("user", user);
+        model.addAttribute("form", form);
         return "employer-registration-form";
     }
 
     @GetMapping("employee/registration")
     public String employeeRegistration(Model model) {
-        User user = new User();
-        user.setRoleId(2);
+        RegistrationForm form = new RegistrationForm();
+        form.setRoleId(2);
 
-        model.addAttribute("user", user);
+        model.addAttribute("form", form);
         return "employee-registration-form";
     }
 
     @PostMapping("registration/save")
-    public String employeeRegistrationSave(@ModelAttribute("user") User user, BindingResult result, Model model) {
-        User existingUser = userService.find(user.getLogin());
+    public String registrationSave(@Valid @ModelAttribute("form") RegistrationForm form, BindingResult result) {
+        User existingUser = userService.find(form.getLogin());
 
         if (existingUser != null) {
             result.rejectValue("login", "1", "Login exists");
         }
 
-        if (user.getName().equals("anonymousUser")) {
+        if (form.getName().equals("anonymousUser")) {
             result.rejectValue("login", "2", "Forbidden login");
         }
 
         if (result.hasErrors()) {
-            model.addAttribute(user);
-            return "authentication/employee/registration";
+            return "redirect:/authentication/employer/registration";
         }
 
-        user.setRole(roleService.find(user.getRoleId()));
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.create(user);
+        User newUser = new User();
 
-        return "redirect:authentication/login";
+        newUser.setRole(roleService.find(form.getRoleId()));
+        newUser.setLogin(form.getLogin());
+        newUser.setPassword(passwordEncoder.encode(form.getPassword()));
+        newUser.setName(form.getName());
+        newUser.setSurname(form.getSurname());
+        newUser.setAge(form.getAge());
+        newUser.setResume(form.getResume());
+        newUser.setOrganization(form.getOrganization());
+
+        userService.create(newUser);
+
+        return "redirect:/authentication/login";
     }
 }

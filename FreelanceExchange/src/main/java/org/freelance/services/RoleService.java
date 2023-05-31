@@ -16,6 +16,10 @@ public class RoleService implements AbstractService<Role>{
         return DAO.find(id);
     }
 
+    public Role findByName(String name) {
+        return DAO.findByName(name);
+    }
+
     @Override
     public List<Role> findAll() {
         return DAO.findAll();
