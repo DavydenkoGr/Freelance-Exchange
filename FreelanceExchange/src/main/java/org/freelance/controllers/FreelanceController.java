@@ -29,7 +29,6 @@ public class FreelanceController {
 
         model.addAttribute("user", user);
         model.addAttribute("tasks", tasks);
-
         return "freelance";
     }
 }

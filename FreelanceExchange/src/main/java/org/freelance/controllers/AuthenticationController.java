@@ -32,6 +32,7 @@ public class AuthenticationController {
     public String employerRegistration(Model model) {
         User user = new User();
         user.setRoleId(1);
+
         model.addAttribute("user", user);
         return "employer-registration-form";
     }
@@ -40,6 +41,7 @@ public class AuthenticationController {
     public String employeeRegistration(Model model) {
         User user = new User();
         user.setRoleId(2);
+
         model.addAttribute("user", user);
         return "employee-registration-form";
     }

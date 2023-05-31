@@ -42,18 +42,16 @@ public class TasksController {
 
     @PostMapping("create-task/save")
     public String saveTask(@ModelAttribute("task") Task task, BindingResult result, Model model) {
-        System.out.println(0);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.find(authentication.getName());
 
         if (result.hasErrors()) {
-            System.out.println(1);
             return "create-task";
         }
 
         task.setEmployer(user);
         taskService.create(task);
-        System.out.println(2);
+
         return "redirect:/profile";
     }
 }
