@@ -33,10 +33,10 @@
                 <div class="col" th:each="task: ${tasks}">
 
                     <div class="card">
+                        <h5 class="card-header" th:text="${task.name}"></h5>
                         <div class="card-body">
-                            <h5 class="card-title" th:text="${task.name}"></h5>
+                            <h6 class="card-title" th:text="'Employer: ' + ${task.employer.name} + ' ' + ${task.employer.surname}"></h6>
                             <h6 class="card-subtitle mb-2 text-muted" th:text="'Amount: ' + ${task.price} + '$'"></h6>
-                            <p class="card-text" th:text="'Employer: ' + ${task.employer.surname} + ' ' + ${task.employer.name}"></p>
                             <div class="d-grid gap-2" style="margin-top: 10px;">
                                 <a class="btn btn-primary" th:href="@{/tasks/task(id=${task.id})}" role="button">Watch</a>
                             </div>
