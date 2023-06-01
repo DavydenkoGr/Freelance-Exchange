@@ -25,25 +25,25 @@ public class TaskDao implements AbstractHibernateDao<Task> {
         return response;
     }
 
-//    public List<Task> findByEmployerId(long id) {
-//        Session session = sessionFactory.getCurrentSession();
-//        Transaction transaction = session.beginTransaction();
-//        List<Task> response = session.createQuery(
-//                "SELECT t FROM Task t WHERE t.employer_id = " + id, Task.class
-//        ).getResultList();
-//        transaction.commit();
-//        return response;
-//    }
+    public List<Task> findByEmployerId(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        List<Task> response = session.createQuery(
+                "SELECT t FROM Task t WHERE t.employer.id = " + id, Task.class
+        ).getResultList();
+        transaction.commit();
+        return response;
+    }
 
-//    public List<Task> findByEmployeeId(long id) {
-//        Session session = sessionFactory.getCurrentSession();
-//        Transaction transaction = session.beginTransaction();
-//        List<Task> response = session.createQuery(
-//                "SELECT t FROM Task t WHERE t.employee_id = " + id, Task.class
-//        ).getResultList();
-//        transaction.commit();
-//        return response;
-//    }
+    public List<Task> findByEmployeeId(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        List<Task> response = session.createQuery(
+                "SELECT t FROM Task t WHERE t.employee != null and t.employee.id = " + id, Task.class
+        ).getResultList();
+        transaction.commit();
+        return response;
+    }
 
     @Override
     public List<Task> findAll() {

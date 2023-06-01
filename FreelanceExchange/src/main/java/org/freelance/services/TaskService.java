@@ -16,6 +16,14 @@ public class TaskService implements AbstractService<Task> {
         return DAO.find(id);
     }
 
+    public List<Task> findByEmployerId(long id) {
+        return DAO.findByEmployerId(id);
+    }
+
+    public List<Task> findByEmployeeId(long id) {
+        return DAO.findByEmployeeId(id);
+    }
+
     @Override
     public List<Task> findAll() {
         return DAO.findAll();
