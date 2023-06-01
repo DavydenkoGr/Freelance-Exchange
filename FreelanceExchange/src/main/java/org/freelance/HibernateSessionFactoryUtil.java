@@ -8,8 +8,15 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.springframework.context.annotation.Bean;
 
+/**
+ * Util which creates SessionFactory bean
+ */
 @org.springframework.context.annotation.Configuration
 public class HibernateSessionFactoryUtil {
+    /**
+     * Instantiate SessionFactory object to work with database
+     * @return SessionFactory instance
+     */
     @Bean(name="entityManagerFactory")
     public static SessionFactory getSessionFactory() {
         try {
