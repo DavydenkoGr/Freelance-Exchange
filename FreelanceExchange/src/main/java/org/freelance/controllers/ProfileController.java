@@ -10,8 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class ProfileController {
@@ -25,11 +25,12 @@ public class ProfileController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.find(authentication.getName());
 
-        if (user == null) {
-            return "redirect:/authentication/login";
+        List<Task> tasks;
+        if (Objects.equals(user.getRole().getName(), "employer")) {
+            tasks = taskService.findByEmployerId(user.getId());
+        } else {
+            tasks = taskService.findByEmployeeId(user.getId());
         }
-
-        List<Task> tasks = taskService.findAll();
 
         model.addAttribute("user", user);
         model.addAttribute("tasks", tasks);
