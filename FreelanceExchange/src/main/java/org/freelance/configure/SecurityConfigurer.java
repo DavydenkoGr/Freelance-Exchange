@@ -31,7 +31,8 @@ public class SecurityConfigurer {
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/authentication/**", "/freelance", "/tasks/task").permitAll()
                                 .requestMatchers("/profile").authenticated()
-                                .requestMatchers("/tasks/**").hasAuthority("EMPLOYER")
+                                .requestMatchers("/tasks/create-task", "/tasks/save", "/tasks/delete").hasAuthority("EMPLOYER")
+                                .requestMatchers("/tasks/accept", "/tasks/complete").hasAuthority("EMPLOYEE")
                 ).formLogin(
                         form -> form
                                 .loginPage("/authentication/login")
