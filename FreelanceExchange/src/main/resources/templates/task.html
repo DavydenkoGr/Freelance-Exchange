@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <!-- Bootstrap5 -->
@@ -36,9 +36,16 @@
                     <h5 class="card-title" th:text="'Employer: ' + ${task.employer.name} + ' ' + ${task.employer.surname}"></h5>
                     <h6 class="card-subtitle mb-2 text-muted" th:text="'Amount: ' + ${task.price} + '$'"></h6>
                     <p class="card-text" th:text="${task.description}"></p>
-                    <div class="d-grid gap-2">
-                        <a class="btn" style="background-color: #81C784;" href="#" role="button">Accept</a>
+
+                    <div class="d-grid gap-2" sec:authorize="isAuthenticated()">
+                        <a class="btn" style="background-color: #81C784;" href="#" role="button"
+                           th:if="${user.role.name} == 'employee' and !${task.employee} and !${task.isCompleted}">Accept</a>
+                        <a class="btn btn-danger" href="#" role="button"
+                           th:if="${task.employer.id} == ${user.id}">Delete</a>
+                        <a class="btn btn-success" href="#" role="button"
+                           th:if="${task.employee} and ${task.employee.id} == ${user.id}">Complete</a>
                     </div>
+
                 </div>
             </div>
 

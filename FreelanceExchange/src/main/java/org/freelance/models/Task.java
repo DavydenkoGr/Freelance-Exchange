@@ -33,9 +33,6 @@ public class Task {
     @Column(nullable = false)
     @Getter @Setter private int price;
 
-    @Column(columnDefinition = "boolean default true", nullable = false)
-    @Getter @Setter private boolean isFree;
-
     @Column(columnDefinition = "boolean default false", nullable = false)
     @Getter @Setter private boolean isCompleted;
 
