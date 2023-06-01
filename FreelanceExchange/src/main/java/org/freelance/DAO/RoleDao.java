@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
+/**
+ * Role dao implementation
+ */
 @Repository
 @Transactional
 public class RoleDao implements AbstractHibernateDao<Role> {
@@ -25,6 +28,11 @@ public class RoleDao implements AbstractHibernateDao<Role> {
         return response;
     }
 
+    /**
+     * Find role in database by name
+     * @param name role name
+     * @return founded role
+     */
     public Role findByName(String name) {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();

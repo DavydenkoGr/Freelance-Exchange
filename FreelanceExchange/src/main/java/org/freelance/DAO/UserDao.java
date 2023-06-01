@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
+/**
+ * User dao implementation
+ */
 @Repository
 @Transactional
 public class UserDao implements AbstractHibernateDao<User> {
@@ -25,6 +28,11 @@ public class UserDao implements AbstractHibernateDao<User> {
         return response;
     }
 
+    /**
+     * Find user by unique login
+     * @param login user login
+     * @return founded user instance
+     */
     public User find(String login) {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();

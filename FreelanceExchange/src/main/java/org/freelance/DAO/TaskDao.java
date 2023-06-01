@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
+/**
+ * Task dao implementation
+ */
 @Repository
 @Transactional
 public class TaskDao implements AbstractHibernateDao<Task> {
@@ -34,6 +37,11 @@ public class TaskDao implements AbstractHibernateDao<Task> {
         return response;
     }
 
+    /**
+     * Find all task in database with specified employer id
+     * @param id employer id
+     * @return list of founded tasks
+     */
     public List<Task> findByEmployerId(long id) {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
@@ -44,6 +52,11 @@ public class TaskDao implements AbstractHibernateDao<Task> {
         return response;
     }
 
+    /**
+     * Find all task in database with specified employee id
+     * @param id employee id
+     * @return list of founded tasks
+     */
     public List<Task> findByEmployeeId(long id) {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
@@ -54,6 +67,10 @@ public class TaskDao implements AbstractHibernateDao<Task> {
         return response;
     }
 
+    /**
+     * Find all free task
+     * @return list of founded free tasks
+     */
     public List<Task> findFree() {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
