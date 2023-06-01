@@ -13,6 +13,9 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Additional table which contains roles names
+ */
 @Entity
 @Table(name = "roles")
 public class Role {

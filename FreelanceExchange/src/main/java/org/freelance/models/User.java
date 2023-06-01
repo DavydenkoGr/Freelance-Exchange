@@ -17,6 +17,10 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * General model for all type of users
+ * Contains all users information
+ */
 @Entity
 @Table(name = "users")
 public class User {

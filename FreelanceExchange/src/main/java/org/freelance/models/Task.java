@@ -12,6 +12,9 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Task model which connect with employer and employee
+ */
 @Entity
 @Table(name = "tasks")
 public class Task {
