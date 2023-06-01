@@ -16,6 +16,11 @@ public class TaskService implements AbstractService<Task> {
         return DAO.find(id);
     }
 
+    @Override
+    public List<Task> findAll() {
+        return DAO.findAll();
+    }
+
     public List<Task> findByEmployerId(long id) {
         return DAO.findByEmployerId(id);
     }
@@ -24,9 +29,8 @@ public class TaskService implements AbstractService<Task> {
         return DAO.findByEmployeeId(id);
     }
 
-    @Override
-    public List<Task> findAll() {
-        return DAO.findAll();
+    public List<Task> findFree() {
+        return DAO.findFree();
     }
 
     @Override

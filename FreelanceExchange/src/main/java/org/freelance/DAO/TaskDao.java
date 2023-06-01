@@ -25,6 +25,15 @@ public class TaskDao implements AbstractHibernateDao<Task> {
         return response;
     }
 
+    @Override
+    public List<Task> findAll() {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        List<Task> response = session.createQuery("SELECT t FROM Task t", Task.class).getResultList();
+        transaction.commit();
+        return response;
+    }
+
     public List<Task> findByEmployerId(long id) {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
@@ -45,11 +54,12 @@ public class TaskDao implements AbstractHibernateDao<Task> {
         return response;
     }
 
-    @Override
-    public List<Task> findAll() {
+    public List<Task> findFree() {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        List<Task> response = session.createQuery("SELECT t FROM Task t", Task.class).getResultList();
+        List<Task> response = session.createQuery(
+                "SELECT t FROM Task t WHERE t.employee = null", Task.class
+        ).getResultList();
         transaction.commit();
         return response;
     }
