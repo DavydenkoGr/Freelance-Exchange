@@ -43,6 +43,9 @@
                                 <a type="button" class="btn btn-primary">Edit profile</a>
                                 <a type="button" class="btn btn-outline-danger ms-1" th:href="@{/logout}">Logout</a>
                             </div>
+                            <div class="d-flex justify-content-center mb-2">
+                                <a type="button" class="btn btn-outline-success" th:if="${user.role.name} == 'employer'" th:href="@{/tasks/create-task}">Add task</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -89,18 +92,17 @@
                         </div>
                     </div>
 
-
                     <div class="card mb-4">
                         <div class="card-body">
                             <h5 class="card-title">Resume</h5>
                             <hr>
-                            <p class="card-text" th:text="${user.resume}"></p>
+                            <p class="card-text" th:text="${user.resume} ?: ${user.name} + ' ' + ${user.surname} + ' didn\'t specify any additional information'"></p>
                         </div>
                     </div>
 
                 </div>
 
-                <div class="row row-cols-1 row-cols-md-2 g-4" style="margin-top: 10px;">
+                <div class="row row-cols-1 row-cols-md-2 g-4" style="margin-top: 0px;">
                     <div class="col" th:each="task: ${tasks}">
 
                         <div class="card">
