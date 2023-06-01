@@ -25,7 +25,7 @@ public class FreelanceController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.find(authentication.getName());
 
-        List<Task> tasks = taskService.findAll();
+        List<Task> tasks = taskService.findFree();
 
         model.addAttribute("user", user);
         model.addAttribute("tasks", tasks);
