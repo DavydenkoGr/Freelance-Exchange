@@ -7,6 +7,9 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Auxiliary dto which transport information from page to program
+ */
 public class RegistrationForm {
     @NotNull
     @Size(min = 3, max = 40)
