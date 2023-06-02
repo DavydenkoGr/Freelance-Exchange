@@ -59,12 +59,14 @@ public class User {
     @Column(length = 10000)
     @Getter @Setter private String information;
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee",
+            fetch = FetchType.EAGER)
     @Getter @Setter private List<Task> tasks = new ArrayList<>();
 
     @OneToMany(mappedBy = "employer",
             cascade = CascadeType.ALL,
-            orphanRemoval = true)
+            orphanRemoval = true,
+            fetch = FetchType.EAGER)
     @Getter @Setter private List<Task> offers = new ArrayList<>();
 
     @Transient

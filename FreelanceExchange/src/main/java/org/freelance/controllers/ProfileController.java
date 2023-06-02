@@ -43,9 +43,9 @@ public class ProfileController {
 
         List<Task> tasks;
         if (Objects.equals(user.getRole().getName(), "employer")) {
-            tasks = taskService.findByEmployerId(user.getId());
+            tasks = user.getOffers();
         } else {
-            tasks = taskService.findByEmployeeId(user.getId());
+            tasks = user.getTasks();
         }
 
         model.addAttribute("user", user);
