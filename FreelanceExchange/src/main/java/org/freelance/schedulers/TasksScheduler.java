@@ -44,6 +44,6 @@ public class TasksScheduler {
         }
 
         long currentTime = Calendar.getInstance().getTime().getTime();
-        return 14 - (int) ((currentTime - task.getCompleteDate().getTime()) / DAY_MS);
+        return Math.max(0, 14 - (int) ((currentTime - task.getCompleteDate().getTime()) / DAY_MS));
     }
 }
