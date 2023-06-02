@@ -61,6 +61,14 @@ public class TaskService implements AbstractService<Task> {
     }
 
     /**
+     * Send request to find all completed tasks
+     * @return found tasks list
+     */
+    public List<Task> findCompleted() {
+        return DAO.findCompleted();
+    }
+
+    /**
      * Send save request
      * @param entity task instance
      * @return saved task

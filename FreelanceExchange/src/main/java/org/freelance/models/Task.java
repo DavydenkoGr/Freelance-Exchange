@@ -12,6 +12,8 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 /**
  * Task model which connect with employer and employee
  */
@@ -41,4 +43,7 @@ public class Task {
 
     @Column(length = 10000)
     @Getter @Setter private String description;
+
+    @Column
+    @Getter @Setter private Date completeDate;
 }

@@ -91,6 +91,20 @@ public class TaskDao implements AbstractHibernateDao<Task> {
     }
 
     /**
+     * Find all completed task
+     * @return list of founded completed tasks
+     */
+    public List<Task> findCompleted() {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        List<Task> response = session.createQuery(
+                "SELECT t FROM Task t WHERE t.completeDate != null", Task.class
+        ).getResultList();
+        transaction.commit();
+        return response;
+    }
+
+    /**
      * Save task instance to database
      * @param entity task instance
      * @return task
