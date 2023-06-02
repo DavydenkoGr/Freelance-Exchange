@@ -97,7 +97,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Information</h5>
                             <hr>
-                            <p class="card-text" th:text="${user.information} ?: ${user.name} + ' ' + ${user.surname} + ' didn\'t specify any additional information'"></p>
+                            <p class="card-text" th:text="${user.information} and ${user.information} != '' ? ${user.information} : ${user.name} + ' ' + ${user.surname} + ' didn\'t specify any additional information'"></p>
                         </div>
                     </div>
 
@@ -106,7 +106,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Resume</h5>
                             <hr>
-                            <p class="card-text" th:text="${user.resume} ?: ${user.name} + ' ' + ${user.surname} + ' didn\'t specify any additional information'"></p>
+                            <p class="card-text" th:text="${user.resume} and ${user.resume} != '' ? ${user.resume} : ${user.name} + ' ' + ${user.surname} + ' didn\'t specify any additional information'"></p>
                         </div>
                     </div>
 

@@ -35,7 +35,7 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="'Employer: ' + ${task.employer.name} + ' ' + ${task.employer.surname}"></h5>
                     <h6 class="card-subtitle mb-2 text-muted" th:text="'Amount: ' + ${task.price} + '$'"></h6>
-                    <p class="card-text" th:text="${task.description}"></p>
+                    <p class="card-text" th:text="${task.description} and ${task.description} != '' ? ${task.description} : ${task.employer.name} + ' didn\'t specify any information about task'"></p>
 
                     <div class="d-grid gap-2" sec:authorize="isAuthenticated()">
                         <a class="btn" style="background-color: #81C784;" th:href="@{/tasks/accept(id=${task.id})}" role="button"
