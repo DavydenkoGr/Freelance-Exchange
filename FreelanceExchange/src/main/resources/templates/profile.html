@@ -39,14 +39,18 @@
                             <h5 class="my-3" th:text="${user.name} + ' ' + ${user.surname}"></h5>
                             <p class="text-muted mb-1" th:text="${user.organization}"></p>
                             <p class="text-muted mb-4" th:text="${user.address} and ${user.address} != '' ? ${user.address} : 'no information available'"></p>
-                            <hr>
-                            <div class="d-flex justify-content-center mb-2">
-                                <a type="button" class="btn btn-primary">Edit profile</a>
-                                <a type="button" class="btn btn-outline-danger ms-1" th:href="@{/logout}">Logout</a>
+
+                            <div th:if="${currentUser.id} == ${user.id}">
+                                <hr>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <a type="button" class="btn btn-primary">Edit profile</a>
+                                    <a type="button" class="btn btn-outline-danger ms-1" th:href="@{/logout}">Logout</a>
+                                </div>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <a type="button" class="btn btn-outline-success" th:if="${user.role.name} == 'employer'" th:href="@{/tasks/create-task}">Add task</a>
+                                </div>
                             </div>
-                            <div class="d-flex justify-content-center mb-2">
-                                <a type="button" class="btn btn-outline-success" th:if="${user.role.name} == 'employer'" th:href="@{/tasks/create-task}">Add task</a>
-                            </div>
+
                         </div>
                     </div>
                 </div>
