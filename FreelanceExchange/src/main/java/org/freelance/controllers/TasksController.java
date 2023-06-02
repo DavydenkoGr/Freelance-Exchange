@@ -12,6 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Tasks controller
+ */
 @Controller
 @RequestMapping("tasks")
 public class TasksController {
@@ -20,6 +23,12 @@ public class TasksController {
     @Autowired
     private TaskService taskService;
 
+    /**
+     * Task page handler
+     * Display all task information
+     * @param id requested task id
+     * @param model transfers data to templates
+     */
     @GetMapping("task")
     public String task(@RequestParam("id") String id, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -32,6 +41,11 @@ public class TasksController {
         return "task";
     }
 
+    /**
+     * Create task form for employers
+     * Call /tasks/save page when user completes form
+     * @param model transfers data to templates
+     */
     @GetMapping("create-task")
     public String createTask(Model model) {
         Task task = new Task();
@@ -40,6 +54,11 @@ public class TasksController {
         return "create-task";
     }
 
+    /**
+     * Create task form handler, check if task valid and save to database
+     * @param task completed task form
+     * @param result processing report
+     */
     @PostMapping("save")
     public String saveTask(@ModelAttribute("task") Task task, BindingResult result) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -55,6 +74,10 @@ public class TasksController {
         return "redirect:/profile";
     }
 
+    /**
+     * Request page for employers to delete their tasks with specified id
+     * @param id task id
+     */
     @GetMapping("delete")
     public String deleteTask(@RequestParam("id") String id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -71,6 +94,10 @@ public class TasksController {
         return "redirect:/profile";
     }
 
+    /**
+     * Request page for employees, assign task to employee
+     * @param id task id
+     */
     @GetMapping("accept")
     public String acceptTask(@RequestParam("id") String id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -88,6 +115,10 @@ public class TasksController {
         return "redirect:/tasks/task?id=" + id;
     }
 
+    /**
+     * Request page for employees, mark task as completed
+     * @param id task id
+     */
     @GetMapping("complete")
     public String completeTask(@RequestParam("id") String id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
