@@ -8,12 +8,18 @@ import org.springframework.stereotype.Service;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * Scheduler responsible for tasks
+ */
 @Service
 public class TasksScheduler {
     private final static int TWO_WEEKS_MS = 1209600000;
     @Autowired
     private TaskService taskService;
 
+    /**
+     * Delete tasks completed more than two weeks ago
+     */
     @Scheduled(fixedDelayString = "PT01H")
     private void checkExpiration() {
         List<Task> tasks = taskService.findCompleted();
