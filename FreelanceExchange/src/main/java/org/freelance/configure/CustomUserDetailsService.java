@@ -14,11 +14,21 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+/**
+ * Service which provides user authentication
+ */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserService userService;
 
+    /**
+     * User loader
+     * Find user with specified username in database and issue rights
+     * @param username the username identifying the user whose data is required.
+     * @return generated User instance
+     * @throws UsernameNotFoundException if it cannot find user
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.find(username);
@@ -31,6 +41,11 @@ public class CustomUserDetailsService implements UserDetailsService {
                 mapRolesToAuthorities(Arrays.asList(user.getRole())));
     }
 
+    /**
+     * Generate roles list for user
+     * @param roles user roles
+     * @return roles list
+     */
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(

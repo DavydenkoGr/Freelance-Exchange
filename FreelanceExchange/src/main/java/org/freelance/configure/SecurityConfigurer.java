@@ -12,6 +12,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+/**
+ * Security configurer, provide user authentication
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfigurer {
@@ -20,11 +23,21 @@ public class SecurityConfigurer {
     @Autowired
     private UserService userService;
 
+    /**
+     * General password encoder
+     * @return password encoder instance
+     */
     @Bean
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Filter for http requests, control access to different site pages
+     * @param http request address
+     * @return built http
+     * @throws Exception if there is a problem with processing
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
@@ -47,6 +60,11 @@ public class SecurityConfigurer {
         return http.build();
     }
 
+    /**
+     * Charge authentication to CustomUserDetailsService and password encoder
+     * @param auth authentication object
+     * @throws Exception if there is problems with authentication
+     */
     @Autowired
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
