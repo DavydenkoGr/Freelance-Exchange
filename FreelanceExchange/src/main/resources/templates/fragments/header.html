@@ -20,7 +20,7 @@
     <title>Header</title>
 </head>
 <body>
-    <!-- Navbar -->
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="header">
         <div class="container-fluid">
 
@@ -65,15 +65,18 @@
                 </div>
 
                 <div class="d-flex align-items-center" sec:authorize="isAuthenticated()">
-                    <a type="button" class="btn btn-link px-3 me-2" th:href="@{/profile}"
-                       th:text="${#authentication.getPrincipal().getUsername()}"></a>
+                    <a
+                            type="button"
+                            class="btn btn-link px-3 me-2"
+                            th:href="@{/profile}"
+                            th:text="${#authentication.getPrincipal().getUsername()}"
+                    ></a>
                 </div>
 
             </div>
 
         </div>
     </nav>
-    <!-- Navbar -->
 
     <!-- MDB -->
     <script

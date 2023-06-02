@@ -20,15 +20,18 @@
     <title>Footer</title>
 </head>
 <body>
+
     <footer class="bd-footer py-3 mt-5" th:fragment="footer">
         <div class="container py-3">
             <div class="row">
                 <div class="col-lg-5 mb-3">
-                    <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none" href="/freelance">
+                    <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none" th:href="@{/freelance}">
                         <span class="fs-5">Freelance Exchange</span>
                     </a>
                     <ul class="list-unstyled small text-muted">
-                        <li class="mb-2">Created by <a href="https://t.me/snakemanysss">Chechetkin Alexander</a> and <a href="https://t.me/desertSmoke42">Davydenko Grigorii</a></li>
+                        <li class="mb-2">
+                            Created by <a href="https://t.me/snakemanysss">Chechetkin Alexander</a> and <a href="https://t.me/desertSmoke42">Davydenko Grigorii</a>
+                        </li>
                         <li class="mb-2">Currently v1.0-SNAPSHOT.</li>
                     </ul>
                 </div>

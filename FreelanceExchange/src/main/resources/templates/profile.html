@@ -20,6 +20,7 @@
     <title>Profile</title>
 </head>
 <body>
+
     <div th:insert="fragments/header :: header"> </div>
     <section style="background-color: #eee;">
         <div class="container py-5">
@@ -30,7 +31,7 @@
                         <div class="card-body text-center">
                             <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 150px;"
                                  alt="Avatar" />
-                            <h5 class="my-3" th:text="${user.name} + ' ' + ${user.surname}"></h5>
+                            <h5 class="my-3" th:text="|${user.name} ${user.surname}|"></h5>
                             <p class="text-muted mb-1" th:text="${user.organization}"></p>
                             <p class="text-muted mb-4" th:text="${user.address} and ${user.address} != '' ? ${user.address} : 'no information available'"></p>
 
@@ -67,7 +68,7 @@
                                     <p class="mb-0">Full Name</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0" th:text="${user.name} + ' ' + ${user.surname}"></p>
+                                    <p class="text-muted mb-0" th:text="|${user.name} ${user.surname}|"></p>
                                 </div>
                             </div>
                             <hr>
@@ -95,7 +96,8 @@
                         <div class="card-body">
                             <h5 class="card-title">Information</h5>
                             <hr>
-                            <p class="card-text" th:text="${user.information} and ${user.information} != '' ? ${user.information} : ${user.name} + ' ' + ${user.surname} + ' didn\'t specify any additional information'"></p>
+                            <p class="card-text" th:text="${user.information} and ${user.information} != '' ? ${user.information} :
+                            |${user.name} ${user.surname} didn't specify any additional information|"></p>
                         </div>
                     </div>
 
@@ -103,7 +105,8 @@
                         <div class="card-body">
                             <h5 class="card-title">Resume</h5>
                             <hr>
-                            <p class="card-text" th:text="${user.resume} and ${user.resume} != '' ? ${user.resume} : ${user.name} + ' ' + ${user.surname} + ' didn\'t specify any additional information'"></p>
+                            <p class="card-text" th:text="${user.resume} and ${user.resume} != '' ? ${user.resume} :
+                            |${user.name} ${user.surname} didn't specify any additional information|"></p>
                         </div>
                     </div>
 
@@ -115,8 +118,8 @@
                         <div class="card">
                               <div class="card-body">
                                   <h5 class="card-title" th:text="${task.name}"></h5>
-                                  <h6 class="card-subtitle mb-2 text-muted" th:text="'Amount: ' + ${task.price} + '$'"></h6>
-                                  <p class="card-text" th:text="'Employer: ' + ${task.employer.surname} + ' ' + ${task.employer.name}"></p>
+                                  <h6 class="card-subtitle mb-2 text-muted" th:text="|Amount: ${task.price}$|"></h6>
+                                  <p class="card-text" th:text="|Employer: ${task.employer.surname} ${task.employer.name}|"></p>
                                   <div class="d-grid gap-2" style="margin-top: 10px;">
                                       <a class="btn btn-primary" th:href="@{/tasks/task(id=${task.id})}" role="button">Watch</a>
                                   </div>
