@@ -29,7 +29,7 @@ public class FreelanceController {
      * @param model transfers data to templates
      * @param request search request, null if absence
      */
-    @GetMapping("freelance")
+    @GetMapping(path = {"/freelance", "/", "/index"})
     public String freelance(Model model, String request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.find(authentication.getName());

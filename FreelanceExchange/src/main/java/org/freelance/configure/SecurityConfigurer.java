@@ -42,7 +42,7 @@ public class SecurityConfigurer {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/authentication/**", "/freelance", "/tasks/task").permitAll()
+                        authorize.requestMatchers("/authentication/**", "/freelance", "/", "/index", "/tasks/task").permitAll()
                                 .requestMatchers("/profile").authenticated()
                                 .requestMatchers("/tasks/create-task", "/tasks/save", "/tasks/delete").hasAuthority("EMPLOYER")
                                 .requestMatchers("/tasks/accept", "/tasks/complete").hasAuthority("EMPLOYEE")
