@@ -2,12 +2,6 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <!-- Bootstrap5 -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-          crossorigin="anonymous"
-    />
     <!-- Font Awesome -->
     <link
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -33,7 +27,7 @@
             <div class="card">
                 <h5 class="card-header" th:text="${task.name}"></h5>
                 <div class="card-body">
-                    <h5 class="card-title" th:text="'Employer: ' + ${task.employer.name} + ' ' + ${task.employer.surname}"></h5>
+                    <a class="h5 card-title text-body" th:href="@{/profile(id=${task.employer.id})}" th:text="'Employer: ' + ${task.employer.name} + ' ' + ${task.employer.surname}"></a>
                     <h6 class="card-subtitle mb-2 text-muted" th:text="'Amount: ' + ${task.price} + '$'"></h6>
                     <p class="card-text" th:text="${task.description} and ${task.description} != '' ? ${task.description} : ${task.employer.name} + ' didn\'t specify any information about task'"></p>
 
@@ -57,11 +51,6 @@
     </section>
     <div th:insert="fragments/footer :: footer"></div>
 
-    <!-- Bootstrap5 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-            crossorigin="anonymous"
-    ></script>
     <!-- MDB -->
     <script
             type="text/javascript"
