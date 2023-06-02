@@ -1,5 +1,7 @@
 package org.freelance.controllers;
 
+import jakarta.validation.Valid;
+import org.freelance.forms.TaskForm;
 import org.freelance.models.Task;
 import org.freelance.models.User;
 import org.freelance.schedulers.TasksScheduler;
@@ -57,19 +59,17 @@ public class TasksController {
      */
     @GetMapping("create-task")
     public String createTask(Model model) {
-        Task task = new Task();
-
-        model.addAttribute("task", task);
+        model.addAttribute("form", new TaskForm());
         return "create-task";
     }
 
     /**
      * Create task form handler, check if task valid and save to database
-     * @param task completed task form
+     * @param form completed task form
      * @param result processing report
      */
     @PostMapping("save")
-    public String saveTask(@ModelAttribute("task") Task task, BindingResult result) {
+    public String saveTask(@Valid @ModelAttribute("form") TaskForm form, BindingResult result) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.find(authentication.getName());
 
@@ -77,7 +77,13 @@ public class TasksController {
             return "create-task";
         }
 
+        Task task = new Task();
+
+        task.setName(form.getName());
         task.setEmployer(user);
+        task.setPrice(form.getPrice());
+        task.setDescription(form.getDescription());
+
         taskService.create(task);
 
         return "redirect:/profile";
