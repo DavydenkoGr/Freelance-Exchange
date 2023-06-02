@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Main page controller
+ */
 @Controller
 public class FreelanceController {
     @Autowired
@@ -20,6 +23,12 @@ public class FreelanceController {
     @Autowired
     private TaskService taskService;
 
+    /**
+     * Menu handler, show list of active tasks
+     * Support substring search
+     * @param model transfers data to templates
+     * @param request search request, null if absence
+     */
     @GetMapping("freelance")
     public String freelance(Model model, String request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

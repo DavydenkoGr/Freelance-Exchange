@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * User profile controller
+ */
 @Controller
 public class ProfileController {
     @Autowired
@@ -20,6 +23,11 @@ public class ProfileController {
     @Autowired
     private TaskService taskService;
 
+    /**
+     * User profile handler
+     * Show list of user tasks and main user information
+     * @param model transfers data to templates
+     */
     @GetMapping("profile")
     public String profile(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
