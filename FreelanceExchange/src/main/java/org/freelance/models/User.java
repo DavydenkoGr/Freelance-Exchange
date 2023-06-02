@@ -60,12 +60,12 @@ public class User {
     @Getter @Setter private String information;
 
     @OneToMany(mappedBy = "employee")
-    private List<Task> tasks = new ArrayList<>();
+    @Getter @Setter private List<Task> tasks = new ArrayList<>();
 
     @OneToMany(mappedBy = "employer",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private List<Task> offers = new ArrayList<>();
+    @Getter @Setter private List<Task> offers = new ArrayList<>();
 
     @Transient
     @Getter @Setter long roleId;

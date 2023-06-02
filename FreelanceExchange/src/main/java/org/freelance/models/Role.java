@@ -29,5 +29,5 @@ public class Role {
     @OneToMany(mappedBy = "role",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private List<User> users = new ArrayList<>();
+    @Getter @Setter private List<User> users = new ArrayList<>();
 }
