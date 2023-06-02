@@ -48,17 +48,16 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
 
                 <div class="d-flex align-items-center" sec:authorize="!isAuthenticated()">
-                    <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Register
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" th:href="@{/authentication/employer/registration}">Register employer</a></li>
-                                <li><a class="dropdown-item" th:href="@{/authentication/employee/registration}">Register employee</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <div class="btn-group shadow-0">
+                        <button type="button" class="btn btn-link dropdown-toggle" data-mdb-toggle="dropdown" aria-expanded="false">
+                            Register
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/authentication/employer/registration}">Register employer</a></li>
+                            <li><a class="dropdown-item" th:href="@{/authentication/employee/registration}">Register employee</a></li>
+                        </ul>
+                    </div>
+
                     <a type="button" class="btn btn-primary me-3" th:href="@{/authentication/login}">
                         Login
                     </a>

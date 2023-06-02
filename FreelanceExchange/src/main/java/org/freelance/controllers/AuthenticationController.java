@@ -87,19 +87,20 @@ public class AuthenticationController {
             return "redirect:/authentication/employer/registration";
         }
 
-        User newUser = new User();
+        User user = new User();
 
-        newUser.setRole(roleService.find(form.getRoleId()));
-        newUser.setLogin(form.getLogin());
-        newUser.setPassword(passwordEncoder.encode(form.getPassword()));
-        newUser.setName(form.getName());
-        newUser.setSurname(form.getSurname());
-        newUser.setAge(form.getAge());
-        newUser.setAddress(form.getAddress());
-        newUser.setResume(form.getResume());
-        newUser.setOrganization(form.getOrganization());
+        user.setRole(roleService.find(form.getRoleId()));
+        user.setLogin(form.getLogin());
+        user.setPassword(passwordEncoder.encode(form.getPassword()));
+        user.setName(form.getName());
+        user.setSurname(form.getSurname());
+        user.setAge(form.getAge());
+        user.setAddress(form.getAddress());
+        user.setOrganization(form.getOrganization());
+        user.setResume(form.getResume());
+        user.setInformation(form.getInformation());
 
-        userService.create(newUser);
+        userService.create(user);
 
         return "redirect:/authentication/login";
     }
