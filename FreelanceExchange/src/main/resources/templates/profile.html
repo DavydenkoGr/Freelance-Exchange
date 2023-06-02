@@ -32,7 +32,8 @@
                             <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 150px;"
                                  alt="Avatar" />
                             <h5 class="my-3" th:text="|${user.name} ${user.surname}|"></h5>
-                            <p class="text-muted mb-1" th:text="${user.organization}"></p>
+                            <p class="text-muted mb-1" th:if="${user.role.name} == 'employer'" th:text="${user.organization}"></p>
+                            <p class="text-muted mb-1" th:if="${user.role.name} == 'employee'">Employee</p>
                             <p class="text-muted mb-4" th:text="${user.address} and ${user.address} != '' ? ${user.address} : 'no information available'"></p>
 
                             <div th:if="${currentUser.id} == ${user.id}">
