@@ -2,6 +2,7 @@ package org.freelance.controllers;
 
 import org.freelance.models.Task;
 import org.freelance.models.User;
+import org.freelance.schedulers.TasksScheduler;
 import org.freelance.services.TaskService;
 import org.freelance.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +42,11 @@ public class TasksController {
 
         Task task = taskService.find(Integer.parseInt(id));
 
+        Integer daysBeforeExpiration = TasksScheduler.getDaysRemaining(task);
+
         model.addAttribute("user", user);
         model.addAttribute("task", task);
+        model.addAttribute("daysBeforeExpiration", daysBeforeExpiration);
         return "task";
     }
 

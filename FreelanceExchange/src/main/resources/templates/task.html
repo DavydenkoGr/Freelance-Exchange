@@ -49,6 +49,8 @@
                     </div>
 
                 </div>
+                <div class="card-footer text-danger" th:if="${task.completeDate}"
+                     th:text="'Task will be deleted after ' + ${daysBeforeExpiration} + ' days'"></div>
             </div>
 
         </div>

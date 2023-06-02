@@ -14,6 +14,7 @@ import java.util.List;
 @Service
 public class TasksScheduler {
     private final static int TWO_WEEKS_MS = 1209600000;
+    private final static int DAY_MS = 86400000;
     @Autowired
     private TaskService taskService;
 
@@ -30,5 +31,19 @@ public class TasksScheduler {
                 taskService.delete(task);
             }
         }
+    }
+
+    /**
+     * Calculate days remaining before task deleting (two weeks)
+     * @param task completed task
+     * @return days before expiration
+     */
+    public static Integer getDaysRemaining(Task task) {
+        if (task.getCompleteDate() == null) {
+            return null;
+        }
+
+        long currentTime = Calendar.getInstance().getTime().getTime();
+        return 14 - (int) ((currentTime - task.getCompleteDate().getTime()) / DAY_MS);
     }
 }
