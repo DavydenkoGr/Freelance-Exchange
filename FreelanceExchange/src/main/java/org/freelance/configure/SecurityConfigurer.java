@@ -43,7 +43,7 @@ public class SecurityConfigurer {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/authentication/**", "/freelance", "/", "/index", "/tasks/task", "/user").permitAll()
-                                .requestMatchers("/profile").authenticated()
+                                .requestMatchers("/profile/**").authenticated()
                                 .requestMatchers("/tasks/create-task", "/tasks/save", "/tasks/delete").hasAuthority("EMPLOYER")
                                 .requestMatchers("/tasks/accept", "/tasks/complete").hasAuthority("EMPLOYEE")
                 ).formLogin(
