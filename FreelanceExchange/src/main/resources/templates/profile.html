@@ -38,7 +38,7 @@
                                  alt="Avatar" />
                             <h5 class="my-3" th:text="${user.name} + ' ' + ${user.surname}"></h5>
                             <p class="text-muted mb-1" th:text="${user.organization}"></p>
-                            <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+                            <p class="text-muted mb-4" th:text="${user.address} and ${user.address} != '' ? ${user.address} : 'no information available'"></p>
                             <hr>
                             <div class="d-flex justify-content-center mb-2">
                                 <a type="button" class="btn btn-primary">Edit profile</a>
@@ -87,7 +87,7 @@
                                     <p class="mb-0">Address</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
+                                    <p class="text-muted mb-0" th:text="${user.address} and ${user.address} != '' ? ${user.address} : 'no information available'"></p>
                                 </div>
                             </div>
                         </div>
@@ -100,7 +100,6 @@
                             <p class="card-text" th:text="${user.information} and ${user.information} != '' ? ${user.information} : ${user.name} + ' ' + ${user.surname} + ' didn\'t specify any additional information'"></p>
                         </div>
                     </div>
-
 
                     <div class="card mb-4" th:if="${user.role.name} == 'employee'">
                         <div class="card-body">

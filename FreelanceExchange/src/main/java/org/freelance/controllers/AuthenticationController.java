@@ -95,6 +95,7 @@ public class AuthenticationController {
         newUser.setName(form.getName());
         newUser.setSurname(form.getSurname());
         newUser.setAge(form.getAge());
+        newUser.setAddress(form.getAddress());
         newUser.setResume(form.getResume());
         newUser.setOrganization(form.getOrganization());
 

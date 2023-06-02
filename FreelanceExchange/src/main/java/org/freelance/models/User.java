@@ -44,19 +44,23 @@ public class User {
     @Column(nullable = false)
     @Getter @Setter private String surname;
 
+    @Column
     @Getter @Setter private int age;
+
+    @Column(length = 50)
+    @Getter @Setter private String address;
 
     @Column(length = 10000)
     @Getter @Setter private String resume;
 
-    @Column(columnDefinition = "varchar(255) default 'sole trader'")
+    @Column
     @Getter @Setter private String organization;
 
     @Column(length = 10000)
     @Getter @Setter private String information;
 
     @OneToMany(mappedBy = "employee")
-    private List<Task> tasks =  new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
 
     @OneToMany(mappedBy = "employer",
             cascade = CascadeType.ALL,

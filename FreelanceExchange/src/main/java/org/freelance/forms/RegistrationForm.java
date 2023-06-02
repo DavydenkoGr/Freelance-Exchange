@@ -1,5 +1,6 @@
 package org.freelance.forms;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -40,6 +41,11 @@ public class RegistrationForm {
     @Getter
     @Setter
     private int age;
+
+    @Size(max = 50)
+    @Getter
+    @Setter
+    private String address;
 
     @Size(max=255)
     @Getter
