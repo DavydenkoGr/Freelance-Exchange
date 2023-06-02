@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Calendar;
+
 /**
  * Tasks controller
  */
@@ -131,6 +133,7 @@ public class TasksController {
         }
 
         task.setCompleted(true);
+        task.setCompleteDate(Calendar.getInstance().getTime());
         taskService.update(task);
 
         return "redirect:/tasks/task?id=" + id;
