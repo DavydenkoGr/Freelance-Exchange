@@ -10,6 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -17,7 +19,7 @@ import java.util.Objects;
  * User profile controller
  */
 @Controller
-public class ProfileController {
+public class ProfilesController {
     @Autowired
     private UserService userService;
     @Autowired
@@ -43,5 +45,27 @@ public class ProfileController {
         model.addAttribute("user", user);
         model.addAttribute("tasks", tasks);
         return "profile";
+    }
+
+    /**
+     * Other user profile handler
+     * Show list of user tasks and main user information
+     * @param id user id
+     * @param model transfers data to templates
+     */
+    @GetMapping("user")
+    public String userProfile(@RequestParam("id") String id, Model model) {
+        User user = userService.find(Integer.parseInt(id));
+
+        List<Task> tasks;
+        if (Objects.equals(user.getRole().getName(), "employer")) {
+            tasks = taskService.findByEmployerId(user.getId());
+        } else {
+            tasks = taskService.findByEmployeeId(user.getId());
+        }
+
+        model.addAttribute("user", user);
+        model.addAttribute("tasks", tasks);
+        return "user";
     }
 }
