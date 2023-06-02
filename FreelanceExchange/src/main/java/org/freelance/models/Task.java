@@ -11,7 +11,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.Date;
 
 /**
@@ -37,9 +36,6 @@ public class Task {
 
     @Column(nullable = false)
     @Getter @Setter private int price;
-
-    @Column(columnDefinition = "boolean default false", nullable = false)
-    @Getter @Setter private boolean isCompleted;
 
     @Column(length = 10000)
     @Getter @Setter private String description;

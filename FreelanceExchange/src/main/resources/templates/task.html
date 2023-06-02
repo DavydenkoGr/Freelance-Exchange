@@ -39,11 +39,11 @@
 
                     <div class="d-grid gap-2" sec:authorize="isAuthenticated()">
                         <a class="btn" style="background-color: #81C784;" th:href="@{/tasks/accept(id=${task.id})}" role="button"
-                           th:if="${user.role.name} == 'employee' and !${task.employee} and !${task.isCompleted}">Accept</a>
+                           th:if="${user.role.name} == 'employee' and !${task.employee} and !${task.completeDate}">Accept</a>
                         <a class="btn btn-success" th:href="@{/tasks/complete(id=${task.id})}" role="button"
-                           th:if="${task.employee} and ${task.employee.id} == ${user.id} and !${task.isCompleted}">Complete</a>
+                           th:if="${task.employee} and ${task.employee.id} == ${user.id} and !${task.completeDate}">Complete</a>
                         <button class="btn btn-success" role="button" disabled
-                           th:if="${task.employee} and ${task.employee.id} == ${user.id} and ${task.isCompleted}">Already completed!</button>
+                           th:if="${task.employee} and ${task.employee.id} == ${user.id} and ${task.completeDate}">Already completed!</button>
                         <a class="btn btn-danger" th:href="@{/tasks/delete(id=${task.id})}" role="button"
                            th:if="${task.employer.id} == ${user.id}">Delete</a>
                     </div>
