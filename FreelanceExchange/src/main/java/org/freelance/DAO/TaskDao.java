@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Task dao implementation
+ * Dao object which organize work with database tasks table using SessionFactory object
  */
 @Repository
 @Transactional
@@ -19,6 +19,11 @@ public class TaskDao implements AbstractHibernateDao<Task> {
     @Autowired
     private SessionFactory sessionFactory;
 
+    /**
+     * Find task by id in database
+     * @param id task id
+     * @return found task or null if not exist
+     */
     @Override
     public Task find(long id) {
         Session session = sessionFactory.getCurrentSession();
@@ -28,6 +33,10 @@ public class TaskDao implements AbstractHibernateDao<Task> {
         return response;
     }
 
+    /**
+     * Find all tasks in database table
+     * @return found tasks list
+     */
     @Override
     public List<Task> findAll() {
         Session session = sessionFactory.getCurrentSession();
@@ -81,6 +90,11 @@ public class TaskDao implements AbstractHibernateDao<Task> {
         return response;
     }
 
+    /**
+     * Save task instance to database
+     * @param entity task instance
+     * @return task
+     */
     @Override
     public Task create(Task entity) {
         Preconditions.checkNotNull(entity);
@@ -91,6 +105,10 @@ public class TaskDao implements AbstractHibernateDao<Task> {
         return entity;
     }
 
+    /**
+     * Save or update task instance
+     * @param entity task instance
+     */
     @Override
     public void update(Task entity) {
         Preconditions.checkNotNull(entity);
@@ -100,6 +118,10 @@ public class TaskDao implements AbstractHibernateDao<Task> {
         transaction.commit();
     }
 
+    /**
+     * Delete task instance from database
+     * @param entity task instance
+     */
     @Override
     public void delete(Task entity) {
         Preconditions.checkNotNull(entity);
@@ -109,6 +131,10 @@ public class TaskDao implements AbstractHibernateDao<Task> {
         transaction.commit();
     }
 
+    /**
+     * Delete task instance from database
+     * @param id task id
+     */
     @Override
     public void delete(long id) {
         Task entity = find(id);

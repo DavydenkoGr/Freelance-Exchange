@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * User dao implementation
+ * Dao object which organize work with database users table using SessionFactory object
  */
 @Repository
 @Transactional
@@ -19,6 +19,11 @@ public class UserDao implements AbstractHibernateDao<User> {
     @Autowired
     private SessionFactory sessionFactory;
 
+    /**
+     * Find user by id in database
+     * @param id user id
+     * @return found user or null if not exist
+     */
     @Override
     public User find(long id) {
         Session session = sessionFactory.getCurrentSession();
@@ -45,6 +50,10 @@ public class UserDao implements AbstractHibernateDao<User> {
         return response;
     }
 
+    /**
+     * Find all users in database table
+     * @return found users list
+     */
     @Override
     public List<User> findAll() {
         Session session = sessionFactory.getCurrentSession();
@@ -67,6 +76,11 @@ public class UserDao implements AbstractHibernateDao<User> {
 //        return response;
 //    }
 
+    /**
+     * Save user instance to database
+     * @param entity user instance
+     * @return user
+     */
     @Override
     public User create(User entity) {
         Preconditions.checkNotNull(entity);
@@ -77,6 +91,10 @@ public class UserDao implements AbstractHibernateDao<User> {
         return entity;
     }
 
+    /**
+     * Save or update user instance
+     * @param entity user instance
+     */
     @Override
     public void update(User entity) {
         Preconditions.checkNotNull(entity);
@@ -86,6 +104,10 @@ public class UserDao implements AbstractHibernateDao<User> {
         transaction.commit();
     }
 
+    /**
+     * Delete user instance from database
+     * @param entity user instance
+     */
     @Override
     public void delete(User entity) {
         Preconditions.checkNotNull(entity);
@@ -95,6 +117,10 @@ public class UserDao implements AbstractHibernateDao<User> {
         transaction.commit();
     }
 
+    /**
+     * Delete user instance from database
+     * @param id user id
+     */
     @Override
     public void delete(long id) {
         User entity = find(id);
