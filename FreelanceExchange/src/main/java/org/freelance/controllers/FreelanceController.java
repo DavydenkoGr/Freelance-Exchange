@@ -33,7 +33,6 @@ public class FreelanceController {
     public String freelance(Model model, String request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.find(authentication.getName());
-        System.out.println(request);
 
         List<Task> tasks = taskService.findFree();
 
