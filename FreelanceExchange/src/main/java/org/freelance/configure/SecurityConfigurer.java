@@ -50,7 +50,7 @@ public class SecurityConfigurer {
                         form -> form
                                 .loginPage("/authentication/login")
                                 .loginProcessingUrl("/authentication/login")
-                                .defaultSuccessUrl("/profile")
+                                .defaultSuccessUrl("/profile", true)
                                 .permitAll()
                 ).logout(
                         logout -> logout

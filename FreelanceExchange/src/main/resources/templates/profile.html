@@ -117,7 +117,10 @@
 
                         <div class="card">
                               <div class="card-body">
-                                  <h5 class="card-title" th:text="${task.name}"></h5>
+                                  <h5 class="card-header">
+                                      <span th:text="${task.name}"></span>
+                                      <span class="fa fa-circle-check text-success" th:if="${task.isCompleted}"></span>
+                                  </h5>
                                   <h6 class="card-subtitle mb-2 text-muted" th:text="'Amount: ' + ${task.price} + '$'"></h6>
                                   <p class="card-text" th:text="'Employer: ' + ${task.employer.surname} + ' ' + ${task.employer.name}"></p>
                                   <div class="d-grid gap-2" style="margin-top: 10px;">

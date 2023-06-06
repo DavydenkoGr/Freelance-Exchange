@@ -26,45 +26,54 @@
     <title>Task</title>
 </head>
 <body>
-    <div th:insert="fragments/header :: header"> </div>
-    <section style="background-color: #eee;">
-        <div class="container py-5">
+<div th:insert="fragments/header :: header"></div>
+<section style="background-color: #eee;">
+    <div class="container py-5">
 
-            <div class="card">
-                <h5 class="card-header" th:text="${task.name}"></h5>
-                <div class="card-body">
-                    <h5 class="card-title" th:text="'Employer: ' + ${task.employer.name} + ' ' + ${task.employer.surname}"></h5>
-                    <h6 class="card-subtitle mb-2 text-muted" th:text="'Amount: ' + ${task.price} + '$'"></h6>
-                    <p class="card-text" th:text="${task.description}"></p>
+        <div class="card">
+            <h5 class="card-header">
+                <span th:text="${task.name}"></span>
+                <span class="fa fa-circle-check text-success" th:if="${task.isCompleted}"></span>
+            </h5>
 
-                    <div class="d-grid gap-2" sec:authorize="isAuthenticated()">
-                        <a class="btn" style="background-color: #81C784;" th:href="@{/tasks/accept(id=${task.id})}" role="button"
-                           th:if="${user.role.name} == 'employee' and !${task.employee} and !${task.isCompleted}">Accept</a>
-                        <a class="btn btn-success" th:href="@{/tasks/complete(id=${task.id})}" role="button"
-                           th:if="${task.employee} and ${task.employee.id} == ${user.id} and !${task.isCompleted}">Complete</a>
-                        <button class="btn btn-success" role="button" disabled
-                           th:if="${task.employee} and ${task.employee.id} == ${user.id} and ${task.isCompleted}">Already completed!</button>
-                        <a class="btn btn-danger" th:href="@{/tasks/delete(id=${task.id})}" role="button"
-                           th:if="${task.employer.id} == ${user.id}">Delete</a>
-                    </div>
+            <div class="card-body">
+                <h5 class="card-title"
+                    th:text="'Employer: ' + ${task.employer.name} + ' ' + ${task.employer.surname}"></h5>
+                <h6 class="card-subtitle mb-2 text-muted" th:text="'Amount: ' + ${task.price} + '$'"></h6>
+                <p class="card-text" th:text="${task.description}"></p>
 
+
+                <div class="d-grid gap-2" sec:authorize="isAuthenticated()">
+                    <a class="btn" style="background-color: #81C784;" th:href="@{/tasks/accept(id=${task.id})}"
+                       role="button"
+                       th:if="${user.role.name} == 'employee' and !${task.employee} and !${task.isCompleted}">Accept</a>
+                    <a class="btn btn-success" th:href="@{/tasks/complete(id=${task.id})}" role="button"
+                       th:if="${task.employee} and ${task.employee.id} == ${user.id} and !${task.isCompleted}">Complete</a>
+                    <button class="btn btn-success" role="button" disabled
+                            th:if="${task.employee} and ${task.employee.id} == ${user.id} and ${task.isCompleted}">
+                        Already completed!
+                    </button>
+                    <a class="btn btn-danger" th:href="@{/tasks/delete(id=${task.id})}" role="button"
+                       th:if="${task.employer.id} == ${user.id}">Delete</a>
                 </div>
+
             </div>
-
         </div>
-    </section>
-    <div th:insert="fragments/footer :: footer"></div>
 
-    <!-- Bootstrap5 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-            crossorigin="anonymous"
-    ></script>
-    <!-- MDB -->
-    <script
-            type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.js"
-    ></script>
+    </div>
+</section>
+<div th:insert="fragments/footer :: footer"></div>
+
+<!-- Bootstrap5 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"
+></script>
+<!-- MDB -->
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.js"
+></script>
 
 </body>
 </html>
