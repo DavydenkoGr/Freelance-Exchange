@@ -19,8 +19,6 @@ import java.util.stream.Collectors;
 @Controller
 public class FreelanceController {
     @Autowired
-    private UserService userService;
-    @Autowired
     private TaskService taskService;
 
     /**
@@ -31,9 +29,6 @@ public class FreelanceController {
      */
     @GetMapping(path = {"/freelance", "/", "/index"})
     public String freelance(Model model, String request) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.find(authentication.getName());
-
         List<Task> tasks = taskService.findFree();
 
         if (request != null) {
@@ -42,7 +37,6 @@ public class FreelanceController {
                     .collect(Collectors.toList());
         }
 
-        model.addAttribute("user", user);
         model.addAttribute("tasks", tasks);
         return "freelance";
     }
