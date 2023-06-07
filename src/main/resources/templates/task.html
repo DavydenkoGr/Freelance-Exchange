@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <!-- Font Awesome -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.css"
+            rel="stylesheet"
+    />
+    <title>Task</title>
+</head>
+<body>
+
+    <div th:insert="fragments/header :: header"> </div>
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+
+            <div class="card">
+                <h5 class="card-header" th:text="${task.name}"></h5>
+                <div class="card-body">
+
+                    <a class="h5 card-title text-body">Employer: </a>
+                    <a class="h5 card-title text-body" th:href="@{/profile(id=${task.employer.id})}"
+                       th:text="|${task.employer.name} ${task.employer.surname}|"
+                    ></a>
+
+                    <h6 class="card-subtitle mb-2 text-muted"
+                        th:text="|Amount: ${task.price}$|"
+                    ></h6>
+                    <p class="card-text" th:text="${task.description} and ${task.description} != '' ? ${task.description} : |${task.employer.name} didn't specify any information about task|"></p>
+
+                    <div class="d-grid gap-2" sec:authorize="isAuthenticated()">
+                        <a class="btn" style="background-color: #81C784;" th:href="@{/tasks/accept(id=${task.id})}" role="button"
+                           th:if="${user.role.name} == 'employee' and !${task.employee} and !${task.completeDate}">Accept</a>
+
+                        <a class="btn btn-success" th:href="@{/tasks/complete(id=${task.id})}" role="button"
+                           th:if="${task.employee} and ${task.employee.id} == ${user.id} and !${task.completeDate}">Complete</a>
+
+                        <button class="btn btn-success" role="button" disabled
+                           th:if="${task.employee} and ${task.employee.id} == ${user.id} and ${task.completeDate}">Already completed!</button>
+
+                        <a class="btn btn-danger" th:href="@{/tasks/delete(id=${task.id})}" role="button"
+                           th:if="${task.employer.id} == ${user.id}">Delete</a>
+                    </div>
+
+                </div>
+
+                <div class="card-footer" th:if="${task.employee}">
+                    <a class="text-muted">Employer: </a>
+                    <a class="text-body" th:href="@{/profile(id=${task.employee.id})}"
+                       th:text="|${task.employee.name} ${task.employee.surname}|"
+                    ></a>
+                </div>
+
+                <div class="card-footer text-danger" th:if="${task.completeDate}"
+                     th:text="|Task will be deleted after ${daysBeforeExpiration} days|"
+                ></div>
+            </div>
+
+        </div>
+    </section>
+    <div th:insert="fragments/footer :: footer"></div>
+
+    <!-- MDB -->
+    <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.js"
+    ></script>
+
+</body>
+</html>
