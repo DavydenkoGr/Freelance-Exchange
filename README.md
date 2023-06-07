@@ -42,6 +42,8 @@ http://localhost:8080/freelance
 
 ![installation](usage-examples/installation-example.png)
 
+![launch](usage-examples/launch-example.png)
+
 #### Website
 
 ![website](usage-examples/website-example.png)
