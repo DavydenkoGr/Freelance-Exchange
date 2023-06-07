@@ -12,6 +12,21 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class Application {
     /**
+     * Main method
+     * Run SpringBootApplication
+     * @param args command line args
+     */
+    public static void main(String[] args) {
+        ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
+
+        RoleService roleService = context.getBean(RoleService.class);
+
+        if (roleService.findByName("employer") == null || roleService.findByName("employee") == null) {
+            createRoles(roleService);
+        }
+    }
+
+    /**
      * Default role creation method.
      * Create "employer" and "employee" roles
      *
@@ -28,20 +43,5 @@ public class Application {
 
         roleService.create(employerRole);
         roleService.create(employeeRole);
-    }
-
-    /**
-     * Main method
-     * Run SpringBootApplication
-     * @param args command line args
-     */
-    public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
-
-        RoleService roleService = context.getBean(RoleService.class);
-
-        if (roleService.findByName("employer") == null || roleService.findByName("employee") == null) {
-            createRoles(roleService);
-        }
     }
 }
