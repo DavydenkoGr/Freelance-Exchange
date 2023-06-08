@@ -20,11 +20,11 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class AuthenticationControllerTest {
-    @Mock(name="userService")
+    @Mock
     private UserService userService;
-    @Mock(name="roleService")
+    @Mock
     private RoleService roleService;
-    @Mock(name="passwordEncoder")
+    @Mock
     private PasswordEncoder passwordEncoder;
 
     @Mock
@@ -34,22 +34,22 @@ public class AuthenticationControllerTest {
     private AuthenticationController controller;
 
     @Test
-    void loginTest() {
+    public void loginTest() {
         assertEquals(controller.login(), "login-form");
     }
 
     @Test
-    void employerRegistrationFormTest() {
+    public void employerRegistrationFormTest() {
         assertEquals(controller.employerRegistration(model), "employer-registration-form");
     }
 
     @Test
-    void employeeRegistrationFormTest() {
+    public void employeeRegistrationFormTest() {
         assertEquals(controller.employeeRegistration(model), "employee-registration-form");
     }
 
     @Test
-    void existentUserRegistrationTest() {
+    public void existentUserRegistrationTest() {
         RegistrationForm mockForm = new RegistrationForm();
         mockForm.setLogin("test");
         mockForm.setName("test");
@@ -63,7 +63,7 @@ public class AuthenticationControllerTest {
     }
 
     @Test
-    void anonymousUserTest() {
+    public void anonymousUserTest() {
         RegistrationForm mockForm = new RegistrationForm();
         mockForm.setLogin("test");
         mockForm.setName("anonymousUser");
@@ -77,7 +77,7 @@ public class AuthenticationControllerTest {
     }
 
     @Test
-    void errorsTest() {
+    public void errorsTest() {
         RegistrationForm mockForm = new RegistrationForm();
         mockForm.setLogin("test");
         mockForm.setName("test");

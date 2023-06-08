@@ -1,8 +1,6 @@
 package org.freelance.tests.controllers;
 
-import org.apache.tomcat.util.digester.ArrayStack;
 import org.freelance.controllers.FreelanceController;
-import org.freelance.models.Task;
 import org.freelance.services.TaskService;
 import org.freelance.services.UserService;
 import org.junit.jupiter.api.Test;
@@ -10,29 +8,27 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class FreelanceControllerTests {
-    @Mock(name="userService")
+    @Mock
     private UserService userService;
-    @Mock(name="taskService")
+    @Mock
     private TaskService taskService;
     @Mock
     private Model model;
-
     @InjectMocks
     private FreelanceController controller;
 
     @Test
-    void freelanceTest() {
-        BindingResult mockResult = mock(BindingResult.class);
-        when(taskService.findFree()).thenReturn(new ArrayStack<Task>());
-
+    public void freelanceTest() {
+        when(taskService.findFree()).thenReturn(new ArrayList<>());
         when(userService.find(anyString())).thenReturn(null);
-        controller.freelance(model, "test");
+
+        assertEquals(controller.freelance(model, "test"), "freelance");
     }
 }

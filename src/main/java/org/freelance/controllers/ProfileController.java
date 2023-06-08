@@ -4,7 +4,6 @@ import jakarta.validation.Valid;
 import org.freelance.forms.ProfileEditForm;
 import org.freelance.models.Task;
 import org.freelance.models.User;
-import org.freelance.services.TaskService;
 import org.freelance.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -26,8 +25,6 @@ import java.util.Objects;
 public class ProfileController {
     @Autowired
     private UserService userService;
-    @Autowired
-    private TaskService taskService;
 
     /**
      * User profile handler
