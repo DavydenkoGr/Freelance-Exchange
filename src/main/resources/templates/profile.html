@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <!-- Font Awesome -->
+    <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.css"
+          rel="stylesheet"
+    />
+    <title>Profile</title>
+</head>
+<body>
+
+    <div th:insert="fragments/header :: header"> </div>
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+            <div class="row">
+
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 150px;"
+                                 alt="Avatar" />
+                            <h5 class="my-3" th:text="|${user.name} ${user.surname}|"></h5>
+                            <p class="text-muted mb-1" th:if="${user.role.name} == 'employer'" th:text="${user.organization}"></p>
+                            <p class="text-muted mb-1" th:if="${user.role.name} == 'employee'">Employee</p>
+                            <p class="text-muted mb-4" th:text="${user.address} and ${user.address} != '' ? ${user.address} : 'no information available'"></p>
+
+                            <div th:if="${currentUser.id} == ${user.id}">
+                                <hr>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <a type="button" class="btn btn-primary" th:href="@{/profile/edit}">Edit profile</a>
+                                    <a type="button" class="btn btn-outline-danger ms-1" th:href="@{/logout}">Logout</a>
+                                </div>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <a type="button" class="btn btn-outline-success" th:if="${user.role.name} == 'employer'" th:href="@{/tasks/create-task}">Add task</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Login</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0" th:text="${user.login}"></p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Full Name</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0" th:text="|${user.name} ${user.surname}|"></p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Age</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0" th:text="${user.age}"></p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Address</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0" th:text="${user.address} and ${user.address} != '' ? ${user.address} : 'no information available'"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4" th:if="${user.role.name} == 'employer'">
+                        <div class="card-body">
+                            <h5 class="card-title">Information</h5>
+                            <hr>
+                            <p class="card-text" th:text="${user.information} and ${user.information} != '' ? ${user.information} :
+                            |${user.name} ${user.surname} didn't specify any additional information|"></p>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4" th:if="${user.role.name} == 'employee'">
+                        <div class="card-body">
+                            <h5 class="card-title">Resume</h5>
+                            <hr>
+                            <p class="card-text" th:text="${user.resume} and ${user.resume} != '' ? ${user.resume} :
+                            |${user.name} ${user.surname} didn't specify any additional information|"></p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 g-4" style="margin-top: 0px;">
+                    <div class="col" th:each="task: ${tasks}">
+
+                        <div class="card">
+                              <div class="card-body">
+                                  <h5 class="card-title" th:text="${task.name}"></h5>
+                                  <h6 class="card-subtitle mb-2 text-muted" th:text="|Amount: ${task.price}$|"></h6>
+                                  <p class="card-text" th:text="|Employer: ${task.employer.surname} ${task.employer.name}|"></p>
+                                  <div class="d-grid gap-2" style="margin-top: 10px;">
+                                      <a class="btn btn-primary" th:href="@{/tasks/task(id=${task.id})}" role="button">Watch</a>
+                                  </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <div th:insert="fragments/footer :: footer"></div>
+
+    <!-- MDB -->
+    <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.js"
+    ></script>
+
+</body>
+</html>

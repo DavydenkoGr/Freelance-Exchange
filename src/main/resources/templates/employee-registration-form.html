@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <!-- Font Awesome -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.css"
+            rel="stylesheet"
+    />
+    <title>Registration</title>
+</head>
+<body>
+
+    <div th:insert="fragments/header :: header"> </div>
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+            <h1>Employee registration</h1>
+            <form method="POST" role="form" th:action="@{/authentication/registration/save}" th:object="${form}">
+
+                <div class="mb-3">
+                    <label for="username" class="form-label">Login</label>
+                    <input class="form-control" type="text" id="username" name="username" placeholder="login" th:field="*{login}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input class="form-control" type="password" id="password" name="password" placeholder="password" th:field="*{password}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input class="form-control" type="text" id="name" name="name" placeholder="your name" th:field="*{name}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label for="surname" class="form-label">Surname</label>
+                    <input class="form-control" type="text" id="surname" name="surname" placeholder="your surname" th:field="*{surname}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label for="age" class="form-label">Age</label>
+                    <input class="form-control" type="number" id="age" name="age" placeholder="your real age" th:field="*{age}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <input class="form-control" type="text" id="address" name="address" placeholder="your address (not necessary)" th:field="*{address}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label for="resume" class="form-label">Resume</label>
+                    <textarea class="form-control" id="resume" name="resume" placeholder="information about you and your working experience" th:field="*{resume}"></textarea>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="submit">Confirm registration</button>
+                </div>
+
+                <input type="hidden" id="roleId" name="roleId" th:field="*{roleId}">
+
+            </form>
+        </div>
+    </section>
+    <div th:insert="fragments/footer :: footer"></div>
+
+    <!-- MDB -->
+    <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.js"
+    ></script>
+
+</body>
+</html>
